@@ -20,6 +20,9 @@
 <script src="slides/lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="slides/lib/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="slides/lib/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="slides/lib/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="slides/lib/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="slides/lib/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="slides/lib/navigation-1.1/tabsets.js"></script>
 <script src="slides/lib/clipboard-1.7.1/clipboard.min.js"></script>
 <link href="slides/lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
@@ -229,6 +232,69 @@ summary {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -236,6 +302,16 @@ summary {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -258,12 +334,12 @@ ol {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   margin-left: 0px;
 }
 h3 {
-  font-size: 20px;
+  font-size: 18px;
   margin-top: 2em;
 }
 h4 {
@@ -335,7 +411,9 @@ if (length(pkgs_missing)) install.packages(pkgs_missing, dependencies=TRUE)</cod
 <p>Set the working directory to the ‘parent’ of the data folder you just downloaded. In other words, if you put the ‘data’ folder into <code>C:/Workshops</code>, you would set the working directory to <code>C:/Workshops</code>.</p>
 <p><br />
 </p>
+<div class="indented2">
 <p><strong>TIP</strong>: An easy way to set the working directory is to goto the RStudio menu and select Session &gt;&gt; Set Working Directory &gt;&gt; Choose Directory.</p>
+</div>
 <p><br />
 </p>
 <p>To verify the working directory is set correctly, copy-paste the following lines of code into the RStudio Console. If you see the image, your RStudio session is set up correctly.</p>
@@ -354,20 +432,26 @@ invisible(sapply(pts[2:4], points, asp=1, pch=16, cex=0.5, type=&quot;l&quot;))<
 </p>
 </div>
 </div>
+<div id="workspace" class="section level2">
+<h2>Workspace</h2>
+<p>Try to find a spot which is <strong>comfortable</strong> and <strong>relatively free</strong> from <strong>distractions and background noise</strong>. Some people find a pair of headphones helps minimize distractions.</p>
+<p><strong>Ergonomics</strong> are important! If you’ve ever tried to work on a laptop while sitting on a couch for multiple hours, it isn’t ideal! We will take at least one short bio-break each session.</p>
+<p>A <strong>second screen</strong> is extremely helpful, especially for hands-on workshops where you’ll be working through a software exercise. With a second screen, you can view the instructor’s slides or demo on one screen, and open RStudio on the other.</p>
+<div style="width:660px; margin:2em auto; font-style:italic; font-size:120%; text-align:center;">
+<img src="images/external-monitor_650x350.jpg" style="border:1px solid grey;"/><br/> Connecting an external monitor to your computer is the best option for completing hands-on software workshops in Zoom
+</div>
+</div>
 <div id="slides-and-exercises" class="section level2">
 <h2>Slides and Exercises</h2>
-<p>Most of the exercises will be in the <a href="https://ajlyons.github.io/rspatial_bgs21" target="_blank">slides</a>. Typically you’ll copy-paste starter code, and/or question prompts, from your browser into a R script, and then keep going from there.</p>
+<p>Slides will be added to the course website before each session. The slides will be in HTML format, so you can follow-along online or view them as the instructor presents them on Zoom.</p>
+<p>Short exercises will be included in the <a href="https://ajlyons.github.io/rspatial_bgs21" target="_blank">slides</a>. Typically you’ll be asked to copy-paste starter code from the Zoom chat window into a R script, and then keep going from there.</p>
+<p>Other exercises will be in R Notebooks, that you’ll have to open in RStudio and complete. More info and links will be provided during the workshop.</p>
 <p><br />
 </p>
 </div>
-<div id="zoom-setup" class="section level2">
-<h2>Zoom Setup</h2>
+<div id="zoom" class="section level2">
+<h2>Zoom</h2>
 <p>This workshop will be taught entirely online using the Zoom platform (the link will be sent you via email).</p>
-<div id="setting-up-your-workspace" class="section level3">
-<h3>Setting Up Your Workspace</h3>
-<p>Try to find a spot which is <strong>comfortable</strong> and <strong>relatively free</strong> from <strong>distractions and background noise</strong>. Some people find a pair of headphones helps minimize distractions.</p>
-<p><strong>Ergonomics</strong> are important! If you’ve ever tried to work on a laptop while sitting on a couch for multiple hours, it isn’t ideal! We will take at least one short bio-break.</p>
-</div>
 <div id="use-the-zoom-client" class="section level3">
 <h3>Use the Zoom Client</h3>
 <p>Although you can join Zoom meetings through a browser, we recommend installing the <a href="https://zoom.us/download" target="_blank" rel="noopener"><strong>Zoom Client (App)</strong></a> for Meetings. You may already have it if you’ve used Zoom before, and you see it in the Start Menu (Windows) or Finder (Mac). Please <strong>make sure you have the latest version</strong>, as some of the buttons and features have changed.</p>
@@ -388,11 +472,7 @@ invisible(sapply(pts[2:4], points, asp=1, pch=16, cex=0.5, type=&quot;l&quot;))<
 <h3>Viewing RStudio and Zoom Simultaneously</h3>
 <div id="dual-monitors-best-option" class="section level4">
 <h4>Dual Monitors (Best Option)</h4>
-<p>A <strong>second screen</strong> is very helpful, especially for hands-on workshops where you’ll be working through a software exercise. With a second screen, you can view the instructor’s slides or demo on one screen, and open RStudio on the other.</p>
 <p>If you have an <strong>external monitor</strong> for your laptop / computer, you’re all set. (Tip: turn on Zoom’s <em>dual monitors</em> option, see below). Many TVs can be used as a second monitor depending on the video connections.</p>
-<div style="width:660px; margin:2em auto; font-style:italic; font-size:120%; text-align:center;">
-<img src="images/external-monitor_650x350.jpg" style="border:1px solid grey;"/><br/> Connecting an external monitor to your computer is the best option for completing hands-on software workshops in Zoom
-</div>
 <p>If you don’t have a second monitor, a <strong>tablet</strong> may come in handy for viewing the slides / speaker. The Zoom App is available for all major tablets and phones.</p>
 <p>Note however if you watch the slides on a tablet, you should <strong>also</strong> have Zoom running on your laptop so you can take the polls, click on links in the chat window, share your screen with the instructor, etc. In that scenario, you’ll be logged into the Zoom meeting on two different devices, but only join the audio on one of the devices otherwise you may get a lot of echo!.</p>
 </div>
@@ -437,6 +517,8 @@ Arranging RStudio and Zoom side-by-side on a single monitor on Windows
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -469,6 +551,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 
 </body>
