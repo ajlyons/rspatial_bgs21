@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Base Plotting Part II  " />
+  <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-bgs21 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ajlyons.github.io/rspatial_bgs21 '> https://ajlyons.github.io/rspatial_bgs21 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
+  <meta name="font-size-adjustment" content="2"/>
+  <title>Spatial Data Analysis with R  BayGeo, Spring 2021</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+          </style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACkUlEQVQ4jX2SW0jTcRTHTzNyeZlh6lqmm3POdNPC6SxSEzaqafkykOFoIxTDWpKRFV6iQMNLFyMSsQvUW0WORc2WWBmGKEGZXUyz0NrmNmfa1PYgfHsQ1v5oHjgvX875/M45vy/R8mDJ9caxrFIL5CUWJB00Q9n+7Q+l1BetUMuMTL3JpTB0QVnejd1Hu9DQ60G5eQbqB7PIvj0L2bUZ0KZzghWbs0o7Fx3Tc/B6vStm6+g0wrQvIKh2gKKyUxnNSZoO685SC1YDeL1e9Ll+Ia7WCd5pJ4hojQ8g1nViezETYBqZx93BOdwa9jAgsdUT4J6ZQqC6f4GIiLYU9/RzNWYIdU9hd/8rLjN7UGT8DbWROVVMlQsBBWas142DiIikdfbFMF0POIVm2NzM1zwLS+mvcSsnEajpBSv/8RIgucGJ1EYXEs+NwjrlWfUGMee/Y2PFJIJLrFibex8kOsahhCYnUlpnIL1kh9X9/yMKG2yIOOlAsPYnAveZsE75EEQUQLwTwy5Rsxvx9UxApKEPEYY+BiSizA623oaggkdgq4xLKwRLq7i8sy6EFlpg8wNEVwyAd3wAbZ8cPu3CazeCC/sRojYjaL8Jvm8MPWLDBm03A8CveQ9+7RBia4cYU4QfeokwzTOwc6/4OzKXHap/C5ufD0RNo0i4OAZR81dcnnD69Mp3PxBe9GRkuZdFKk7sqTcQ132EpGUMydetSLnpgOSGHVtbxpHU9AX8mkFEG55/ZrjQL1h82V6esPLVh8Sr40i940J6xzzS7s1C0m6HqHEEiTnatgT5gcPijHxltFwhjpRIQpZjBAJ2lFTBFW5TiOPT8mXx6apdcRl5OaJM1Q6hLC9ls3RPTLgok0NELCKiv02kPqt/O1MZAAAAAElFTkSuQmCC" rel="icon" type="image/x-icon" />
+  <script language="javascript" type="text/javascript">
+  function TriShowHide(shID) {
+    shIDspan = shID + "span";
+    shIDdiv = shID + "div";
+    if (document.getElementById(shIDdiv).style.display != 'block') {
+      document.getElementById(shIDdiv).style.display = 'block';
+      txtSpan = "&#9660;";
+    } else {
+      document.getElementById(shIDdiv).style.display = 'none';
+      txtSpan = "&#9654;";
+    }
+    document.getElementById(shIDspan).innerHTML = txtSpan + " ";
+  }
+  function showHide(shID) {
+    if (shID=="soln-show-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="soln-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else if (shID=="hints-show-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="hints-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else {
+      if (document.getElementById(shID)) {
+        if (document.getElementById(shID).style.display != 'block') {
+          document.getElementById(shID).style.display = 'block';
+        } else {
+          document.getElementById(shID).style.display = 'none';
+        }
+      }
+    }
+  }
+  function CopyToClipboard(containerid) {
+  if (document.selection) {
+      var range = document.body.createTextRange();
+      range.moveToElementText(document.getElementById(containerid));
+      range.select().createTextRange();
+      document.execCommand("copy");
+  } else if (window.getSelection) {
+      var range = document.createRange();
+      range.selectNode(document.getElementById(containerid));
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      // alert("text copied")
+  }}
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163964617-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163964617-1');
+  </script>
+  <script src="lib/header-attrs-2.6/header-attrs.js"></script>
+  <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
+  <script src="lib/slidy-2/scripts/slidy.js"></script>
+  <script src="lib/slidy_shiny-1/slidy_shiny.js"></script>
+  <script src="lib/clipboard-1.7.1/clipboard.min.js"></script>
+  <link href="lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+  <link href="lib/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+  <script src="lib/klippy-0.0.0.9500/js/klippy.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="../css/slidy_styles.css" />
+  <meta name="duration" content="0" />
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span><br/><span class="course-subtitle">BayGeo, Spring 2021</span></h1>
+  <p class="author">
+Base Plotting Part II <br/><img src='images/choropleth_leaflet256_408x210.png'/>
+  </p>
+</div>
+<div id="enhancing-basic-plots" class="slide section level1">
+<h1>Enhancing Basic Plots</h1>
+<script language="javascript" type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<script>
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>Recall our basic plot of Yosemite’s historical places from an earlier section.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">## Basic plot of Yosemite historic places</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">plot</span>(yose_bnd_ll <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">asp=</span><span class="dv">1</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">plot</span>(yose_hp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">add=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="plotting-base-pt2_files/figure-slidy/plot_yose_bnd_ll_klippy1-1.png" width="768" /></p>
+<p>The basic <code>plot()</code> function has dozens of optional arguments you can use to customize a plot. Examples:</p>
+<div class="compact indented1">
+<ul>
+<li>type - type of plot (<em>p</em>=point, <em>l</em>=line, <em>b</em>=both)</li>
+<li>pch - plot character (points layers)<br />
+<img src="images/pch_700x70.png" /></li>
+<li>cex - character expansion factor (1=normal size)</li>
+<li>lwd - line width</li>
+<li>lty - line type</li>
+<li>col - fill</li>
+<li>border - outline color</li>
+<li>main - title</li>
+<li>xlab, ylab - set labels for the x and y axes</li>
+<li>asp - aspect ratio (set <em>asp=1</em> for geographic data)</li>
+<li>axes - whether or not to display axes</li>
+<li>add - set add=TRUE to overlay new feaures on current plot</li>
+</ul>
+</div>
+<div class="tryit">
+<ol style="list-style-type: decimal">
+<li>Try adding the following arguments to your plot command to see what they do.</li>
+</ol>
+<div class="indented2" style="font-family:monospace;">
+<p>axes=T<br />
+asp=1<br />
+col="cornsilk"<br />
+border="chocolate4"<br />
+lwd=2<br />
+main="Historic Places in Yosemite National Park"<br />
+pch=17</p>
+</div>
+<p><span id="soln_jdcqwr" class="showhidesoln" onclick="showHide(&#39;jdcqwr&#39;);return false;">[Solution]</span></p>
+<div id="jdcqwr" class="hint">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">plot</span>(yose_bnd_ll <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">asp=</span><span class="dv">1</span>, <span class="dt">col=</span><span class="st">&quot;cornsilk&quot;</span>, <span class="dt">border=</span><span class="st">&quot;chocolate4&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">axes=</span>T, <span class="dt">main=</span><span class="st">&quot;Historic Places in Yosemite National Park&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">plot</span>(yose_hp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">pch=</span><span class="dv">17</span>, <span class="dt">cex=</span><span class="fl">1.2</span>, <span class="dt">col=</span><span class="st">&quot;darkolivegreen&quot;</span>, <span class="dt">add=</span><span class="ot">TRUE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">grid</span>()</span></code></pre></div>
+<p><img src="plotting-base-pt2_files/figure-slidy/plot_ynp_soln-1.png" width="768" /></p>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li><p>What does <code>grid()</code> do to an existing plot?</p></li>
+<li><p>Play with additional arguments to modify the plot.</p></li>
+</ol>
+</div>
+<div class="tip">
+<p>R supports hexadecimal colors, as well as <a href="../extras/rcolors-named.pdf" target="_blank">657 built-in named colors</a>.</p>
+</div>
+</div>
+<div id="symbolizing-layers-by-attribute-values" class="slide section level1">
+<h1>Symbolizing Layers by Attribute Values</h1>
+<p><code>plot()</code> attempts to use the attribute table when plotting vector layers. The defaut behavior is to create a plot for every column.</p>
+<p>We illustrate this by plotting the county boundaries.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">## Import the county boundaries from a GeoJSON file</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">library</span>(sf)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>ca_counties_ll &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;./data/ca_counties.geojson&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">## Preview the attribute table</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">library</span>(tibble)</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">glimpse</span>(ca_counties_ll)</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">## Plot it with no arguments</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="kw">plot</span>(ca_counties_ll)</span></code></pre></div>
+<pre><code>## Reading layer `ca_counties&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data\ca_counties.geojson&#39; using driver `GeoJSON&#39;
+## Simple feature collection with 58 features and 13 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XYZ
+## bbox:           xmin: -124.4096 ymin: 32.53416 xmax: -114.1312 ymax: 42.00952
+## z_range:        zmin: 0 zmax: 0
+## geographic CRS: WGS 84</code></pre>
+<pre><code>## Rows: 58
+## Columns: 14
+## $ STATEFP    &lt;chr&gt; &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;06&quot;, &quot;...
+## $ COUNTYFP   &lt;chr&gt; &quot;099&quot;, &quot;075&quot;, &quot;005&quot;, &quot;071&quot;, &quot;091&quot;, &quot;093&quot;, &quot;063&quot;, &quot;079&quot;, &quot;049&quot;, &quot;011&quot;, &quot;013&quot;, &quot;111&quot;, &quot;...
+## $ LSAD       &lt;chr&gt; &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;22&quot;, &quot;...
+## $ ALAND      &lt;dbl&gt; 3870792979, 121451664, 1539947591, 51947497395, 2468686345, 16259635719, 6612371925, ...
+## $ AWATER     &lt;dbl&gt; 51176484, 479139414, 29470575, 123929658, 23299112, 179864658, 156389419, 820409436, ...
+## $ CountyFIPS &lt;chr&gt; &quot;06099&quot;, &quot;06075&quot;, &quot;06005&quot;, &quot;06071&quot;, &quot;06091&quot;, &quot;06093&quot;, &quot;06063&quot;, &quot;06079&quot;, &quot;06049&quot;, &quot;060...
+## $ CountyNAME &lt;chr&gt; &quot;Stanislaus County&quot;, &quot;San Francisco County&quot;, &quot;Amador County&quot;, &quot;San Bernardino County&quot;...
+## $ POP2010    &lt;dbl&gt; 515283, 805825, 37860, 2041689, 3221, 44971, 19918, 269860, 9708, 21459, 1052894, 825...
+## $ POP2011    &lt;dbl&gt; 518270, 816239, 37520, 2064663, 3104, 44719, 19690, 271165, 9499, 21415, 1066587, 830...
+## $ POP2012    &lt;dbl&gt; 522134, 829691, 37072, 2080651, 3076, 44214, 19341, 274528, 9332, 21397, 1079358, 835...
+## $ POP2013    &lt;dbl&gt; 526286, 841138, 36602, 2093306, 3040, 43773, 18877, 276284, 9112, 21432, 1095980, 840...
+## $ POP2014    &lt;dbl&gt; 531997, 852469, 36742, 2112619, 3003, 43628, 18606, 279083, 9023, 21419, 1111339, 846...
+## $ SQMI       &lt;dbl&gt; 1494.52, 46.89, 594.58, 20057.04, 953.17, 6277.88, 2553.05, 3298.75, 3915.40, 1150.73...
+## $ geometry   &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON Z (((-121.4868..., MULTIPOLYGON Z (((-122.3321..., MULTIPOL...</code></pre>
+<pre><code>## Warning: plotting the first 9 out of 13 attributes; use max.plot = 13 to plot all</code></pre>
+<p><img src="plotting-base-pt2_files/figure-slidy/plot_ca_counties_exec-1.png" width="768" /></p>
+<p>This is why we’ve been using the <code>st_geometry()</code> function, which essentially drops the attribute table.</p>
+<p>To specify which column to use for symbology, enter the name of the column in square brackets. <code>plot()</code> will select a default symbology based on the data type (e.g., continous vs. discrete).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">plot</span>(ca_counties_ll[<span class="st">&quot;AWATER&quot;</span>])</span></code></pre></div>
+<p><img src="plotting-base-pt2_files/figure-slidy/plot_awater_plain-1.png" width="768" /></p>
+<div class="challenge">
+<p>What happens when you enclode the name of an attribute column in <strong>double</strong> square brackets? Can you explain why?</p>
+<p>[<span id="soln_yutjfj" class="showhidesoln" onclick="showHide(&#39;yutjfj&#39;);return false;">Answer</span>]</p>
+<div id="yutjfj" class="hint">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">plot</span>(ca_counties_ll[[<span class="st">&quot;AWATER&quot;</span>]])</span></code></pre></div>
+<p><img src="plotting-base-pt2_files/figure-slidy/plot_well_being-1.png" width="768" /></p>
+<p>It generates a scatter plot, because double-square brackets returns the column values as a vector of numbers rather than a sf object.</p>
+</div>
+</div>
+</div>
+<div id="customizing-symbology" class="slide section level1">
+<h1>Customizing Symbology</h1>
+<p>A <strong>Choropleth map</strong> is a thematic map in which areas are shaded or patterned in proportion to a variable.</p>
+<p><code>plot()</code> will guess how to symbolize the layers based on the data type of the attribute column (i.e., numeric vs character). You can override these options with additional arguments.</p>
+<div class="indented1">
+<p>Change the number of breaks with <strong><code>nbreaks</code></strong></p>
+<p>Change how breaks are defined (e.g., equal area, equal interval, manual) with <strong><code>breaks</code></strong></p>
+<p>Change the color palette with <strong><code>pal</code></strong></p>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">## Plot the area of water variable with 20 equal interval breaks and a reverse topo color ramp</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">plot</span>(ca_counties_ll[<span class="st">&quot;AWATER&quot;</span>], <span class="dt">axes=</span>T, <span class="dt">nbreaks=</span><span class="dv">20</span>, <span class="dt">breaks=</span><span class="st">&quot;equal&quot;</span>, <span class="dt">pal=</span><span class="kw">rev</span>(<span class="kw">topo.colors</span>(<span class="dv">20</span>)))</span></code></pre></div>
+<p><img src="plotting-base-pt2_files/figure-slidy/plot_awater_pretty-1.png" width="768" /></p>
+<div class="tip">
+<p><strong>Additional <code>plot()</code> arguments for sf objects</strong></p>
+<p>Change where the legend (aka <em>key</em>) appears by manually setting the <strong><code>key.pos</code></strong> argument to 1 (below), 2 (left), 3 (above), or 4 (right).</p>
+<p>Add graticules with <strong><code>graticule=TRUE</code></strong></p>
+</div>
+<div class="tryit">
+<p>Move the legend to the left side and add graticules.</p>
+<p>[<span id="soln_kibvbu" class="showhidesoln" onclick="showHide(&#39;kibvbu&#39;);return false;">Solution</span>]</p>
+<div id="kibvbu" class="hint">
+<div class="sourceCode" id="cb10"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">## Make the county map prettier</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">plot</span>(ca_counties_ll[<span class="st">&quot;AWATER&quot;</span>], </span>
+<span id="cb10-3"><a href="#cb10-3"></a>     <span class="dt">axes=</span>T, </span>
+<span id="cb10-4"><a href="#cb10-4"></a>     <span class="dt">nbreaks=</span><span class="dv">20</span>, </span>
+<span id="cb10-5"><a href="#cb10-5"></a>     <span class="dt">breaks=</span><span class="st">&quot;equal&quot;</span>, </span>
+<span id="cb10-6"><a href="#cb10-6"></a>     <span class="dt">pal=</span><span class="kw">rev</span>(<span class="kw">topo.colors</span>(<span class="dv">20</span>)), </span>
+<span id="cb10-7"><a href="#cb10-7"></a>     <span class="dt">key.pos=</span><span class="dv">2</span>, </span>
+<span id="cb10-8"><a href="#cb10-8"></a>     <span class="dt">graticule=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="plotting-base-pt2_files/figure-slidy/plot_awater_prettier-1.png" width="768" /></p>
+</div>
+</div>
+<div class="tip">
+<p>If you don’t like RStudio’s tiny plot window, you can open a new plot window by running <strong><code>dev.new()</code></strong>. This works particularly well when you have two monitors.</p>
+</div>
+</div>
+<div id="other-packages-for-visualizing-geospatial-data" class="slide section level1">
+<h1>Other Packages for Visualizing Geospatial Data</h1>
+<p>The plotting functions in base R and the sf package are rather basic. For nicer looking plots, including multiple layers, other packages are available:</p>
+<div class="indented1">
+<p><a href="https://mtennekes.github.io/tmap/" target="_blank" rel="noopener">tmap</a> [leaflet] <a href="https://r-spatial.github.io/mapview/" target="_blank">mapview</a> <a href="https://riatelab.github.io/mapsf/" target="_blank" rel="noopener">mapsf</a><br />
+<a href="https://ggplot2.tidyverse.org" target="_blank">ggplot2</a><br />
+<a href="http://riatelab.github.io/cartography/" target="_blank">cartography</a><br />
+<a href="https://cran.r-project.org/package=ggmap" target="_blank">ggmap</a></p>
+</div>
+</div>
+<div id="summary" class="slide section level1">
+<h1>Summary</h1>
+<p>Today we saw how to:</p>
+<div class="compact">
+<ul>
+<li>use <code>plot()</code> to overlay layers with the same CRS<br />
+</li>
+<li>symbolize a map based on attribute values<br />
+</li>
+</ul>
+</div>
+<div class="infobox">
+<p>Additional Resources</p>
+<div class="indented1">
+<p><a href="https://r-spatial.github.io/sf/articles/sf5.html" target="_blank">Plotting Simple Features</a>, sf package Vignette #5</p>
+<p><a href="https://mgimond.github.io/Spatial/mapping-data-in-r.html" target="_blank">Mapping Data in R</a>, Manuel Gimond</p>
+<p>ggplot2:</p>
+<div class="indented2">
+<ul>
+<li><p><a href="https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html" target="_blank">Drawing beautiful maps programmatically</a>, Mel Moreno and Mathieu Basille</p></li>
+<li><p><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" target="_blank">Visualising sf objects in ggplot2</a></p></li>
+</ul>
+</div>
+<p><a href="http://riatelab.github.io/cartography/" target="_blank">cartography</a> package</p>
+</div>
+</div>
+<p>
+<br/>
+<hr/>
+<strong>Next: </strong> <a href="tmap-leaflet.html">Visualization with tmap and leaflet</a>
+</p>
+</div>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+</html>
