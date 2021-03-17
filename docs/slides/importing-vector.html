@@ -306,6 +306,7 @@ Your browser does not support iframes.
 <a href="https://commons.wikimedia.org/wiki/File:Utm-zones-USA.svg"><img src="./images/utm-zones-use_640x480.png"></img></a>
 </div>
 <h2 id="what-you-need-to-remember-about-projections-in-r">What You Need to Remember about Projections in R</h2>
+<div class="indented2">
 <ul>
 <li><p>With a couple of exceptions (tmap), R does not reproject on the fly</p></li>
 <li><p>The packages for importing and exporting spatial data know how to read/write projection info</p></li>
@@ -313,6 +314,7 @@ Your browser does not support iframes.
 <li><p>Some web map packages (e.g., leaflet) require lat-long</p></li>
 <li><p>(Re)projecting within R is easy</p></li>
 </ul>
+</div>
 </div>
 <div id="sf-package" class="slide section level1">
 <h1>sf Package</h1>
@@ -376,6 +378,10 @@ Your browser does not support iframes.
 <div class="infobox">
 <p>Most of the functions in the sf package start with <strong><code>st_</code></strong>, which stands for ‘space time’, and matches the names of similar functions in PostGIS.</p>
 </div>
+</div>
+<div id="r-notebook-exercise" class="slide section level1">
+<h1>R Notebook Exercise</h1>
+<p><a href="https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb_import-gis-data.Rmd" class="uri">https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb_import-gis-data.Rmd</a></p>
 </div>
 <div id="import-the-boundary-for-yosemite-national-park" class="slide section level1">
 <h1>Import the boundary for Yosemite National Park</h1>
@@ -737,7 +743,7 @@ Your browser does not support iframes.
 <p>
 <br/>
 <hr/>
-<strong>Next: </strong> <a href="plotting-base-pt2.html">Basic Maps Pt 2</a>
+<strong>Next: </strong> <a href="sf-manip.html">Common Manipulations for sf Objects</a>
 </p>
 </div>
 
