@@ -236,8 +236,14 @@ R Syntax <br/><img src='images/rsyntax256_485x140.png'/>
 </div>
 <div id="r-as-a-fancy-calculator" class="slide section level1">
 <h1>R as a Fancy Calculator</h1>
-<style>span.operator {font-family:monospace; color:dimgray; margin:0 1em;}</style>
 <script type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<style type="text/css">
+span.operator {
+  font-family:monospace; 
+  color:dimgray; 
+  margin:0 1em;
+}
+</style>
 <script>
   addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
@@ -273,7 +279,7 @@ How many decimals does R display by default?</p>
 <pre><code>## [1] &quot;vanilla&quot;</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>start_date &lt;-<span class="st"> </span><span class="kw">Sys.Date</span>()</span>
 <span id="cb5-2"><a href="#cb5-2"></a>start_date</span></code></pre></div>
-<pre><code>## [1] &quot;2021-03-16&quot;</code></pre>
+<pre><code>## [1] &quot;2021-03-18&quot;</code></pre>
 </div>
 <div id="updating-variables" class="slide section level1">
 <h1>Updating Variables</h1>
@@ -354,11 +360,6 @@ SignatureMethod
 </tbody>
 </table>
 </div>
-<div id="exercise" class="slide section level1">
-<h1>Exercise</h1>
-<p>Copy-paste the contents of following Rmd file into a new file:</p>
-<p><a href="https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb_r-review1.Rmd" class="uri">https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb_r-review1.Rmd</a></p>
-</div>
 <div id="data-types" class="slide section level1">
 <h1>Data Types</h1>
 <p>All variables have a class or data type, which you can view using <tt><strong>class()</strong></tt>.</p>
@@ -398,7 +399,7 @@ SignatureMethod
 <tt><strong>rnorm()</strong></tt> is a function that can generate multiple random numbers:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>devs &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">5</span>)</span>
 <span id="cb14-2"><a href="#cb14-2"></a>devs</span></code></pre></div>
-<pre><code>## [1] -0.3447441  0.5690335  0.8116362  1.2880766 -0.4888451</code></pre>
+<pre><code>## [1]  0.2109471 -0.4549845 -1.4367057 -2.4946293 -0.5622092</code></pre>
 <p><br />
 <tt>c()</tt> stands for <em>combine</em>. It returns a vector containing the arguments passed (which all have to be the same type).</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>yn &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</span>
@@ -427,151 +428,6 @@ SignatureMethod
 <p>You can also use square brackets to extract elements in a different order.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>LETTERS[<span class="dv">4</span><span class="op">:</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;D&quot; &quot;C&quot; &quot;B&quot;</code></pre>
-<div class="tryit">
-<p>1. Write an expression that returns the last 5 letters of the alphabet.</p>
-<p>[<span id="soln_prdjmo" class="showhidesoln" onclick="showHide(&#39;prdjmo&#39;);return false;">Solution</span>]</p>
-<div id="prdjmo" class="hint">
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>LETTERS[<span class="dv">22</span><span class="op">:</span><span class="dv">26</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
-</div>
-<p>2. Write an expression that returns only the vowels.</p>
-<p>[<span id="soln_hkepbm" class="showhidesoln" onclick="showHide(&#39;hkepbm&#39;);return false;">Solution</span>]</p>
-<div id="hkepbm" class="hint">
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>LETTERS[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">9</span>,<span class="dv">15</span>,<span class="dv">21</span>)]</span></code></pre></div>
-<pre><code>## [1] &quot;A&quot; &quot;E&quot; &quot;I&quot; &quot;O&quot; &quot;U&quot;</code></pre>
-</div>
-</div>
-</div>
-<div id="tabular-data" class="slide section level1">
-<h1>Tabular Data</h1>
-<p>R has two data types for two-dimensional data: <strong>data frames</strong> and <strong>matrices</strong>.</p>
-<p>Both of these store data in <strong>rows</strong> and <strong>columns</strong>.</p>
-<p>The columns of a data frame <strong>can have names</strong> and contain <strong>different data types</strong>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co">## View a sample data frame</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="kw">head</span>(iris)</span></code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
-## 5          5.0         3.6          1.4         0.2  setosa
-## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
-<p>The columns of a matrix must all be the <strong>same data type</strong>.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co">## Create a matrix</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">25</span>, <span class="dt">ncol=</span><span class="dv">5</span>)</span></code></pre></div>
-<pre><code>##      [,1] [,2] [,3] [,4] [,5]
-## [1,]    1    6   11   16   21
-## [2,]    2    7   12   17   22
-## [3,]    3    8   13   18   23
-## [4,]    4    9   14   19   24
-## [5,]    5   10   15   20   25</code></pre>
-<p>We’ll learn more about working with data frames in an upcoming session.</p>
-</div>
-<div id="base-r-plotting-functions" class="slide section level1">
-<h1>Base R Plotting Functions</h1>
-<p>While there are <em>many</em> plotting packages, plotting functions in Base R include:</p>
-<p><tt>plot()</tt><br />
-<tt>plot(…, add=TRUE)</tt> <em>overlays more data on the last plot</em><br />
-<tt>hist()</tt><br />
-<tt>barplot()</tt><br />
-<tt>boxplot()</tt></p>
-<div class="infobox">
-<p>‘<strong>Base R</strong>’ refers to the functions available when you first install R (as opposed to functions in additional packages you install later.)</p>
-<p><em>Plot</em> and <em>graph</em> are generally used interchangably.</p>
-</div>
-<div class="tryit">
-<p>Generate these plots. What do the <tt>pch</tt> and <tt>cex</tt> arguments do?</p>
-<div class="indented1 indented1-r">
-<div class="sourceCode" id="cb38"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="dv">1</span>)</span></code></pre></div>
-</div>
-<p><span id="soln_ntveye" class="showhidesoln" onclick="showHide(&#39;ntveye&#39;);return false;">[Solution]</span></p>
-<div id="ntveye" class="hint">
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="syntax_files/figure-slidy/plot_exercise_ans-1.png" width="768" /></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">5</span>, <span class="dt">cex=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="syntax_files/figure-slidy/plot_exercise_ans-2.png" width="768" /></p>
-<p><tt>pch</tt> controls the <strong>symbol shape</strong> (plot character), and <tt>cex</tt> controls the <strong>symbol size</strong> (character extension factor).</p>
-</div>
-</div>
-<div class="challenge">
-<div class="indented1 indented1-r">
-<div class="sourceCode" id="cb41"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co">## Generate 500 random numbers normally distributed</span></span>
-<span id="cb41-2"><a href="#cb41-2"></a></span>
-<span id="cb41-3"><a href="#cb41-3"></a><span class="co">## Compute the average of those numbers</span></span>
-<span id="cb41-4"><a href="#cb41-4"></a></span>
-<span id="cb41-5"><a href="#cb41-5"></a><span class="co">## Create a histogram of the distribution</span></span></code></pre></div>
-</div>
-<p><span id="soln_xfdcum" class="showhidesoln" onclick="showHide(&#39;xfdcum&#39;);return false;">[Solution]</span></p>
-<div id="xfdcum" class="hint">
-<div class="sourceCode" id="cb42"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="co">## Generate 500 random numbers normally distributed</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">500</span>)</span>
-<span id="cb42-3"><a href="#cb42-3"></a><span class="kw">length</span>(x)</span></code></pre></div>
-<pre><code>## [1] 500</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co">## Compute the average of those numbers</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="kw">mean</span>(x)</span></code></pre></div>
-<pre><code>## [1] 0.02363991</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co">## Create a histogram of the distribution</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a><span class="kw">hist</span>(x)</span></code></pre></div>
-<p><img src="syntax_files/figure-slidy/challenge1_ans-1.png" width="768" /></p>
-</div>
-</div>
-<div class="tip">
-<p><strong>Top Five Arguments for Plotting Spatial Data</strong></p>
-<table class="tbl_compact">
-<thead>
-<tr>
-<th style="text-align:left;">
-Argument
-</th>
-<th style="text-align:left;">
-Effect on Plot
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;font-family: monospace;">
-asp = 1
-</td>
-<td style="text-align:left;">
-aspect ratio
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-family: monospace;">
-col=“red”
-</td>
-<td style="text-align:left;">
-fill color
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-family: monospace;">
-border=“blue”
-</td>
-<td style="text-align:left;">
-outline color
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-family: monospace;">
-pch=16
-</td>
-<td style="text-align:left;">
-point symbol (16 = round dot)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-family: monospace;">
-axes = TRUE
-</td>
-<td style="text-align:left;">
-draw axes
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 <div id="working-with-functions" class="slide section level1">
 <h1>Working with Functions</h1>
@@ -579,22 +435,17 @@ draw axes
 <p>See the function’s help page to determine which arguments are expected.</p>
 <p><img src="./images/rnorm_help_16cols_930x690.png" style="border:1px solid gray; margin-left:1em;" /></p>
 <p>If you pass arguments to a function <strong>in the order expected</strong> and <strong>don’t skip any</strong>, you don’t have to name them:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="kw">rnorm</span>(<span class="dv">500</span>, <span class="dv">50</span>, <span class="dv">3</span>)  <span class="co">## generate 500 normally distributed random</span></span>
-<span id="cb47-2"><a href="#cb47-2"></a>                   <span class="co">## numbers with a mean of 50 and stand dev = 3.</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">rnorm</span>(<span class="dv">500</span>, <span class="dv">50</span>, <span class="dv">3</span>)  <span class="co">## generate 500 normally distributed random</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>                   <span class="co">## numbers with a mean of 50 and stand dev = 3.</span></span></code></pre></div>
 <p>If you don’t pass arguments in expected order (or skip some), you have to name them in the parentheses:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">sd=</span><span class="fl">0.3</span>) <span class="co">## generate 100 normally distributed random</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a>                     <span class="co">## numbers with stand deviation = 0.3</span></span></code></pre></div>
-<div class="challenge">
-<div class="indented1 indented1-r">
-<div class="sourceCode" id="cb49"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="co">## Generate a sequence of exactly 8 numbers from 5 to 15</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">sd=</span><span class="fl">0.3</span>) <span class="co">## generate 100 normally distributed random</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>                     <span class="co">## numbers with stand deviation = 0.3</span></span></code></pre></div>
 </div>
-<p><span id="soln_phoshd" class="showhidesoln" onclick="showHide(&#39;phoshd&#39;);return false;">[Solution]</span></p>
-<div id="phoshd" class="hint">
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="co">## Generate a sequence of 8 numbers from 5 to 15</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">5</span>, <span class="dt">to=</span><span class="dv">15</span>, <span class="dt">length.out=</span><span class="dv">8</span>)</span></code></pre></div>
-<pre><code>## [1]  5.000000  6.428571  7.857143  9.285714 10.714286 12.142857 13.571429 15.000000</code></pre>
-</div>
-</div>
+<div id="r-notebook-exercise" class="slide section level1">
+<h1>R Notebook Exercise</h1>
+<p>Open <em>nb_r-review1.Rmd</em></p>
+<p>If you don’t have it, you can get it <a href="https://raw.githubusercontent.com/ucanr-igis/rspatial_data/master/nb_r-review1.Rmd">here</a><br />
+- start a new script then copy-paste contents</p>
 <div class="preview">
 <p><em>Future topics:</em></p>
 <div class="indented2">
@@ -607,6 +458,11 @@ draw axes
 </ul>
 </div>
 </div>
+<p>
+<br/>
+<hr/>
+<strong>Next: </strong> <a href="packages.html">Working with Packages</a>
+</p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
