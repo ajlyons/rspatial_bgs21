@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="R Syntax  " />
+  <meta name="author" content="Plotting 101 " />
   <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-bgs21 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ajlyons.github.io/rspatial_bgs21 '> https://ajlyons.github.io/rspatial_bgs21 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
   <title>Spatial Data Analysis with R  BayGeo, Spring 2021</title>
@@ -231,242 +231,103 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="slide titlepage">
   <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span><br/><span class="course-subtitle">BayGeo, Spring 2021</span></h1>
   <p class="author">
-R Syntax <br/><img src='images/rsyntax256_485x140.png'/>
+Plotting 101<br/><img src='images/plot101_cover_580x244x256.png'/>
   </p>
 </div>
-<div id="r-as-a-fancy-calculator" class="slide section level1">
-<h1>R as a Fancy Calculator</h1>
+<div id="base-r-plotting-functions" class="slide section level1">
+<h1>Base R Plotting Functions</h1>
 <script type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
-<style type="text/css">
-span.operator {
-  font-family:monospace; 
-  color:dimgray; 
-  margin:0 1em;
-}
-</style>
 <script>
   addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span>      <span class="co"># add numbers</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="dv">3</span> <span class="op">^</span><span class="st"> </span><span class="dv">4</span>      <span class="co"># powers</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">sqrt</span>( <span class="dv">49</span> ) <span class="co"># functions</span></span></code></pre></div>
+<p>While there are <em>many</em> plotting packages, plotting functions in Base R include:</p>
+<p><tt>plot()</tt><br />
+<tt>plot(…, add=TRUE)</tt> <em>overlays more data on the last plot</em><br />
+<tt>hist()</tt><br />
+<tt>barplot()</tt><br />
+<tt>boxplot()</tt></p>
+<div class="infobox">
+<p>‘<strong>Base R</strong>’ refers to the functions available when you first install R (as opposed to functions in additional packages you install later.)</p>
+<p>The terms <em>Plot</em> and <em>graph</em> are generally used interchangably.</p>
+</div>
 <div class="tryit">
-<p>Run the commands above in the RStudio console.<br />
-How many decimals does R display by default?</p>
+<p>Generate these plots. What do the <tt>pch</tt> and <tt>cex</tt> arguments do?</p>
+<div class="indented1 indented1-r">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="dv">1</span>)</span></code></pre></div>
 </div>
-<!--- TryIt --->
+<p><span id="soln_ntveye" class="showhidesoln" onclick="showHide(&#39;ntveye&#39;);return false;">[Solution]</span></p>
+<div id="ntveye" class="hint">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="plotting101_files/figure-slidy/plot_exercise_ans-1.png" width="768" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">5</span>, <span class="dt">cex=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="plotting101_files/figure-slidy/plot_exercise_ans-2.png" width="768" /></p>
+<p><tt>pch</tt> controls the <strong>symbol shape</strong> (plot character), and <tt>cex</tt> controls the <strong>symbol size</strong> (character extension factor).</p>
+</div>
+</div>
 <div class="tip">
-<p>White space is generally ignored in R (but helpful for readability).</p>
-<p>Everything in R is case sensitive.</p>
-<p>The <tt>#</tt> character tells R that what comes after is a comment.</p>
-</div>
-</div>
-<div id="variables" class="slide section level1">
-<h1>Variables</h1>
-<p>A key technique in all programming languages is to store values in the form of variables.</p>
-<p>In R, you can use the ‘<tt>=</tt>’ or ‘<tt>&lt;-</tt>’ operators to do this.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">## These are equivalent:</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>y &lt;-<span class="st"> </span><span class="dv">3</span><span class="op">^</span><span class="dv">3</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>y =<span class="st"> </span><span class="dv">3</span><span class="op">^</span><span class="dv">3</span></span></code></pre></div>
-<div class="tip">
-<p>RStudio keyboard shortcut to insert ‘<tt>&lt;-</tt>’: <em>alt + -</em></p>
-<p>The term ‘variable’ and ‘object’ are generally synonymous.</p>
-<p>Note when you assign a value to a variable, R doesn’t print the result to the console. To see the value of a variable, simply type it by itself.</p>
-</div>
-<p>Pretty much anything can be saved to a variable. Here we save some text and dates.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>flv &lt;-<span class="st"> &quot;vanilla&quot;</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>flv</span></code></pre></div>
-<pre><code>## [1] &quot;vanilla&quot;</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>start_date &lt;-<span class="st"> </span><span class="kw">Sys.Date</span>()</span>
-<span id="cb5-2"><a href="#cb5-2"></a>start_date</span></code></pre></div>
-<pre><code>## [1] &quot;2021-03-18&quot;</code></pre>
-</div>
-<div id="updating-variables" class="slide section level1">
-<h1>Updating Variables</h1>
-<p>You can give a new value to a variable at any time.</p>
-<p>You can use ‘current’ value as part of the expression for the ‘new’ value.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>x &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># x is now 2</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a>x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">3</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># x is now 5</span></span></code></pre></div>
-</div>
-<div id="naming-variables" class="slide section level1">
-<h1>Naming Variables</h1>
-<p>The rules for naming variables are pretty flexible. You can use numbers, letters, and most special characters.</p>
-<p>Rules to take note of:</p>
-<div class="indented2">
-<ul>
-<li>Can’t start with a number (e.g., <em>3pieces</em>)<br />
-</li>
-<li>Hyphens and spaces are not allowed</li>
-<li>Don’t use the name of a function (like ‘<tt>c</tt>’) or a reserved keyword (like <tt>pi</tt>)</li>
-</ul>
-</div>
-<h2 id="naming-styles">Naming Styles</h2>
-<p>There are a handful of popular <a href="https://www.r-bloggers.com/consistent-naming-conventions-in-r/" target="_blank">naming styles</a>. Pick one that you like, and be consistent!</p>
+<p><strong>Top Five Arguments for Plotting Spatial Data</strong></p>
 <table class="tbl_compact">
 <thead>
 <tr>
 <th style="text-align:left;">
-Style
+Argument
 </th>
 <th style="text-align:left;">
-Example
+Effect on Plot
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-alllowercase
-</td>
 <td style="text-align:left;font-family: monospace;">
-adjustcolor
+asp = 1
+</td>
+<td style="text-align:left;">
+aspect ratio
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-period.separated
-</td>
 <td style="text-align:left;font-family: monospace;">
-shoe.size
+col=“red”
+</td>
+<td style="text-align:left;">
+fill color
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-underscore_separated (aka snake case)
-</td>
 <td style="text-align:left;font-family: monospace;">
-numeric_version
+border=“blue”
+</td>
+<td style="text-align:left;">
+outline color
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-lowerCamelCase
-</td>
 <td style="text-align:left;font-family: monospace;">
-addTaskCallback
+pch=16
+</td>
+<td style="text-align:left;">
+point symbol (16 = round dot)
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-UpperCamelCase
-</td>
 <td style="text-align:left;font-family: monospace;">
-SignatureMethod
+axes = TRUE
+</td>
+<td style="text-align:left;">
+draw axes
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="data-types" class="slide section level1">
-<h1>Data Types</h1>
-<p>All variables have a class or data type, which you can view using <tt><strong>class()</strong></tt>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>num_plots &lt;-<span class="st"> </span><span class="dv">10</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">class</span>(num_plots)</span></code></pre></div>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<p>Other common data types:</p>
-<div class="indented2">
-<ul>
-<li><strong>character</strong><br />
-</li>
-<li><strong>factor</strong><br />
-</li>
-<li><strong>date</strong><br />
-</li>
-<li><strong>data frame</strong><br />
-</li>
-<li><strong>matrix</strong><br />
-</li>
-<li><strong>list</strong></li>
-</ul>
 </div>
-</div>
-<div id="vectors" class="slide section level1">
-<h1>Vectors</h1>
-<p>Most variables are <strong>vectors</strong>, in other words they can store multiple values. For basic data types, like numbers and characters, these are called <strong>vectors</strong>.</p>
-<p>When we enter <tt>x &lt;- 1</tt>, we are actually creating a numeric vector of length 1.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>x &lt;-<span class="st"> </span><span class="dv">24</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>x</span></code></pre></div>
-<pre><code>## [1] 24</code></pre>
-<p><br />
-<tt><strong>rep()</strong></tt> is a function that repeats a value, returning a vector:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>y &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="st">&quot;ball&quot;</span>, <span class="dv">5</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a>y</span></code></pre></div>
-<pre><code>## [1] &quot;ball&quot; &quot;ball&quot; &quot;ball&quot; &quot;ball&quot; &quot;ball&quot;</code></pre>
-<p><br />
-<tt><strong>rnorm()</strong></tt> is a function that can generate multiple random numbers:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>devs &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">5</span>)</span>
-<span id="cb14-2"><a href="#cb14-2"></a>devs</span></code></pre></div>
-<pre><code>## [1]  0.2728567 -0.1270786 -1.1635021 -1.2865076  0.1442864</code></pre>
-<p><br />
-<tt>c()</tt> stands for <em>combine</em>. It returns a vector containing the arguments passed (which all have to be the same type).</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>yn &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</span>
-<span id="cb16-2"><a href="#cb16-2"></a>yn</span></code></pre></div>
-<pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
-<p><br />
-<tt>LETTERS</tt> is an example of a built-in <strong>constant</strong>. It contains a vector of length 26 containing characters:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>LETTERS</span></code></pre></div>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
-<div class="infobox">
-<p>The <tt><em>[1]</em></tt> and <tt><em>[18]</em></tt> in the output tells you the index of the element displayed after it.</p>
-</div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">length</span>(LETTERS)</span></code></pre></div>
-<pre><code>## [1] 26</code></pre>
-</div>
-<div id="filtering" class="slide section level1">
-<h1>Filtering</h1>
-<p>To extract a single element from a vector, use square bracket notation. Inside the square brackets, put the index of the element you want.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>LETTERS[<span class="dv">2</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;B&quot;</code></pre>
-<p>To return multiple elements, pass multiple indices.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>LETTERS[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;B&quot; &quot;C&quot; &quot;D&quot;</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>LETTERS[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;B&quot; &quot;C&quot; &quot;D&quot;</code></pre>
-<p>You can also use square brackets to extract elements in a different order.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>LETTERS[<span class="dv">4</span><span class="op">:</span><span class="dv">2</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;D&quot; &quot;C&quot; &quot;B&quot;</code></pre>
-</div>
-<div id="working-with-functions" class="slide section level1">
-<h1>Working with Functions</h1>
-<p>Many functions take arguments. Arguments can be required or optional.</p>
-<p>See the function’s help page to determine which arguments are expected.</p>
-<p><img src="./images/rnorm_help_16cols_930x690.png" style="border:1px solid gray; margin-left:1em;" /></p>
-<p>If you pass arguments to a function <strong>in the order expected</strong> and <strong>don’t skip any</strong>, you don’t have to name them:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">rnorm</span>(<span class="dv">500</span>, <span class="dv">50</span>, <span class="dv">3</span>)  <span class="co">## generate 500 normally distributed random</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>                   <span class="co">## numbers with a mean of 50 and stand dev = 3.</span></span></code></pre></div>
-<p>If you don’t pass arguments in expected order (or skip some), you have to name them in the parentheses:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">sd=</span><span class="fl">0.3</span>) <span class="co">## generate 100 normally distributed random</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>                     <span class="co">## numbers with stand deviation = 0.3</span></span></code></pre></div>
-</div>
-<div id="r-notebook-exercise" class="slide section level1">
-<h1>R Notebook Exercise</h1>
-<p>Open <em>nb_syntax-review.Rmd</em></p>
-<div class="indented2">
-<ul>
-<li>If you don’t have it, you can get it <a href="https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb_syntax-review.Rmd">here</a> (start a new script then copy-paste contents)
-</div></li>
-</ul>
-<p><br />
-</p>
-<div class="preview">
-<p><em>Future topics:</em></p>
-<div class="indented2">
-<ul>
-<li>filtering and subsetting data frames</li>
-<li>working with lists</li>
-<li>working with text</li>
-<li>more data types</li>
-<li>piping syntax</li>
-</ul>
-</div>
-</div>
+<div id="next" class="slide section level1">
+<h1>Next</h1>
 <p>
 <br/>
 <hr/>
-<strong>Next: </strong> <a href="packages.html">Working with Packages</a>
+<strong>Next: </strong> <a href="importing-vector.html">Importing and Plotting Vector Data</a>
 </p>
 </div>
 

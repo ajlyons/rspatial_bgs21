@@ -405,21 +405,6 @@ Working with Files and Folders <br/><img src='images/folders_400x300.jpg'/>
 <span id="cb18-8"><a href="#cb18-8"></a><span class="co">## View objects in memory. (rnd_vals should be back!)</span></span>
 <span id="cb18-9"><a href="#cb18-9"></a><span class="kw">ls</span>()</span></code></pre></div>
 </div>
-<div id="r-notebook-exercise" class="slide section level1">
-<h1>R Notebook Exercise</h1>
-<p>Start a new R Notebook then copy-paste the following into it:</p>
-<p><a href="https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb_files-folders.Rmd" class="uri">https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb_files-folders.Rmd</a></p>
-</div>
-<div id="saving-and-sourcing-scripts" class="slide section level1">
-<h1>Saving and Sourcing Scripts</h1>
-<p>You can save and open scripts, R Markdown files, etc. from the RStudio <strong>File</strong> menu.</p>
-<p>If you have a set of commands that you want to rerun repeatedly, you can save them as a *.R file and then run them all at once with <tt><strong>source()</strong></tt> function.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">source</span>(<span class="st">&quot;import_clean_data.R&quot;</span>)</span></code></pre></div>
-<div class="tip">
-<p><tt><strong>source()</strong></tt> automatically runs all the commands in a script, so only use it with scripts that are ‘ready-to-go’.</p>
-<p>To run commands one-by-one, open the script in RStudio and use the ‘run’ button.</p>
-</div>
-</div>
 <div id="rstudio-files-pane" class="slide section level1">
 <h1>RStudio Files Pane</h1>
 <p>In RStudio, use the <strong>Files</strong> tab to browse your files, open R files, and set the working directory.</p>
@@ -433,9 +418,29 @@ Working with Files and Folders <br/><img src='images/folders_400x300.jpg'/>
 </div>
 <!--- tip --->
 </div>
+<div id="saving-and-sourcing-scripts" class="slide section level1">
+<h1>Saving and Sourcing Scripts</h1>
+<p>You can save and open scripts, R Markdown files, etc. from the RStudio <strong>File</strong> menu.</p>
+<p>If you have a set of commands that you want to rerun repeatedly, you can save them as a *.R file and then run them all at once with <tt><strong>source()</strong></tt> function.</p>
+<p>Example: to run all the commands in a script named <em>import_clean_data.R</em>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">source</span>(<span class="st">&quot;import_clean_data.R&quot;</span>)</span></code></pre></div>
+<div class="tip">
+<p><tt><strong>source()</strong></tt> automatically runs all the commands in a script, so only use it with scripts that are ‘ready-to-go’.</p>
+<p>To run commands one-by-one, open the script in RStudio and use the ‘run’ button.</p>
+</div>
+</div>
+<div id="r-notebook-exercise" class="slide section level1">
+<h1>R Notebook Exercise</h1>
+<p>Open <em>nb02_files-folders.Rmd</em></p>
+<div class="indented2">
+<ul>
+<li>If you don’t have it, you can get it <a href="https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb02_files-folders.Rmd" target="_blank" rel="noopener">here</a> (start a new script in RStudio then copy-paste contents)
+</div></li>
+</ul>
+</div>
 <div id="summary" class="slide section level1">
 <h1>Summary</h1>
-<p>Importing and exporting data typically requires passing a <strong>file name</strong>.</p>
+<p>Importing and exporting data typically requires passing a <strong>file name</strong> and/or a <strong>directory name</strong>.</p>
 <p>File names are in reference to the current <strong>Working Directory</strong>, which you specify with the ‘<strong><code>.</code></strong>’</p>
 <p>The ‘Home’ Directory (<code>'~'</code>) is a good place to store things you use frequently.</p>
 <p>Convenience functions like <code>file.exists()</code> and <code>list.files()</code> can make your life easier.</p>
@@ -444,7 +449,7 @@ Working with Files and Folders <br/><img src='images/folders_400x300.jpg'/>
 <p>
 <br/>
 <hr/>
-<strong>Next: </strong> <a href="importing-vector.html">Importing and Plotting Vector Data</a>
+<strong>Next: </strong> <a href="review-pt1.html">Session 1 Review</a>
 </p>
 </div>
 

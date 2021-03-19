@@ -315,6 +315,7 @@ Your browser does not support iframes.
 <li><p>(Re)projecting within R is easy</p></li>
 </ul>
 </div>
+<h2 id="attribute-table">Attribute Table</h2>
 </div>
 <div id="sf-package" class="slide section level1">
 <h1>sf Package</h1>
@@ -323,7 +324,7 @@ Your browser does not support iframes.
 <p><code>sf</code> stands for ‘simple features’, which is a standard (developed by the Open Geospatial Consortium) for storing various geometry types in a hierarchical data model.</p>
 <p>A ‘feature’ is just a representation of a thing in the real world (e.g. a building, a city…).</p>
 <p><code>sf</code> offers numerous specific benefits, including:</p>
-<div class="indented1">
+<div class="compact">
 <ul>
 <li>uses established open source libraries: GDAL, GEOS, PROJ<br />
 </li>
@@ -331,7 +332,7 @@ Your browser does not support iframes.
 </li>
 <li>enhanced plotting<br />
 </li>
-<li>excellent integration with common R data structures (using data.frames)<br />
+<li>excellent integration with common R data structures (using data frames)<br />
 </li>
 <li>integration with the tidyverse packages and %&gt;% piping syntax<br />
 </li>
@@ -365,243 +366,109 @@ Your browser does not support iframes.
 <p>The <span style="color:green; font-weight:bold;">Layer</span> can be a:</p>
 <div class="indented1">
 <p><strong>Shapefile name</strong> (minus the shp extension)</p>
-<p><strong>layer</strong> name in a database</p>
+<p><strong>layer</strong> name in a database / file</p>
 </div>
 </div>
 <div id="import-functions" class="slide section level1">
 <h1>Import Functions</h1>
 <p>The two main functions for importing vector data are:</p>
 <div class="indented1">
-<p><strong><code>st_layers(*source*)</code></strong> <em>returns the names of avilable layers in a source</em></p>
-<p><strong><code>st_read(*source*, *layer*)</code></strong> <em>import into R</em></p>
+<p><span style="font-family:monospace; font-weight:bold;">st_layers(<em>source</em>)</span> <span style="font-style:italic;"> - returns the names of available layers in a source</span></p>
+<p><span style="font-family:monospace; font-weight:bold;">st_read(<em>source</em>, <em>layer</em>)</span> <span style="font-style:italic;"> - import into R</span></p>
 </div>
 <div class="infobox">
 <p>Most of the functions in the sf package start with <strong><code>st_</code></strong>, which stands for ‘space time’, and matches the names of similar functions in PostGIS.</p>
 </div>
-</div>
-<div id="r-notebook-exercise" class="slide section level1">
-<h1>R Notebook Exercise</h1>
-<p><a href="https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb_import-gis-data.Rmd" class="uri">https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb_import-gis-data.Rmd</a></p>
-</div>
-<div id="import-the-boundary-for-yosemite-national-park" class="slide section level1">
-<h1>Import the boundary for Yosemite National Park</h1>
-<p>Let’s import the Yosemite <a href="../datasets.html#yose_boundary" target="_blank">park boundary</a> (which happens to be a Shapefile).</p>
-<p>First we list all the layers in the <a href="../datasets.html" target="_blank">datasets folder</a>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(sf)</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">## View spatial layers in the data folder</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">st_layers</span>(<span class="st">&quot;./data&quot;</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">## Import the &#39;yose_boundary&#39; layer (a Shapefile)</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>yose_bnd_ll &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="dt">dsn=</span><span class="st">&quot;./data&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;yose_boundary&quot;</span>)</span></code></pre></div>
-<pre><code>## Driver: ESRI Shapefile 
-## Available layers:
-##        layer_name geometry_type features fields
-## 1      sf_schools         Point      445     15
-## 2           veg37       Polygon     6512     26
-## 3   yose_boundary       Polygon        1     11
-## 4        yose_poi         Point     2720     30
-## 5 veg37_alliances            NA       39      3
-## Reading layer `yose_boundary&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data&#39; using driver `ESRI Shapefile&#39;
-## Simple feature collection with 1 feature and 11 fields
-## geometry type:  POLYGON
-## dimension:      XY
-## bbox:           xmin: -119.8864 ymin: 37.4947 xmax: -119.1964 ymax: 38.18515
-## geographic CRS: North_American_Datum_1983</code></pre>
 <div class="tip">
 <p>To view the metadata of a layer before brining it into R, use <code>rgdal::ogrInfo()</code></p>
-<p>Because Shapefiles only contain one layer, you can combine the source and layer in the <code>dsn</code> argument:</p>
-<div class="indented1 indented1-r">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>yose_bnd_ll &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="dt">dsn=</span><span class="st">&quot;./data/yose_boundary.shp&quot;</span>)</span></code></pre></div>
 </div>
 </div>
-<p>See what type of object we just created:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">## View the class of the object we just created</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">class</span>(yose_bnd_ll)</span></code></pre></div>
-<pre><code>## [1] &quot;sf&quot;         &quot;data.frame&quot;</code></pre>
-<p>We see that <code>yose_bnd_ll</code> is both a sf object as well as a <code>data.frame</code>. This means we should be able to use the functions designed for <em>either</em> of those objects.</p>
-<div class="tryit">
-<p>Type the name of the object at the console.</p>
-<div class="indented1 indented1-r">
-<div class="sourceCode" id="cb7"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">## View the spatial properties of this layer</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>yose_bnd_ll</span></code></pre></div>
-</div>
-<p>What coordinate reference system is it in? [<span id="soln_hcsduo" class="showhidesoln" onclick="showHide(&#39;hcsduo&#39;);return false;">Answer</span>]</p>
-<div id="hcsduo" class="hint">
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>yose_bnd_ll</span></code></pre></div>
-<pre><code>## Simple feature collection with 1 feature and 11 fields
-## geometry type:  POLYGON
-## dimension:      XY
-## bbox:           xmin: -119.8864 ymin: 37.4947 xmax: -119.1964 ymax: 38.18515
-## geographic CRS: North_American_Datum_1983
-##   UNIT_CODE                                                                           GIS_NOTES
-## 1      YOSE Lands - http://landsnet.nps.gov/tractsnet/documents/YOSE/METADATA/yose_metadata.xml
-##                UNIT_NAME  DATE_EDIT STATE REGION GNIS_ID     UNIT_TYPE CREATED_BY
-## 1 Yosemite National Park 2016-01-27    CA     PW  255923 National Park      Lands
-##                                                 METADATA PARKNAME                       geometry
-## 1 http://nrdata.nps.gov/programs/Lands/YOSE_METADATA.xml Yosemite POLYGON ((-119.8456 37.8327...</code></pre>
-<p><strong>Ans</strong>. unprojected geographic coordinates (long-lat).</p>
-</div>
-</div>
-<p>The <strong><code>names()</code></strong> function returns the column labels of a data frame (in this case the attribute table).</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">## View column names in the attribute table</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">names</span>(yose_bnd_ll)</span></code></pre></div>
-<pre><code>##  [1] &quot;UNIT_CODE&quot;  &quot;GIS_NOTES&quot;  &quot;UNIT_NAME&quot;  &quot;DATE_EDIT&quot;  &quot;STATE&quot;      &quot;REGION&quot;     &quot;GNIS_ID&quot;    &quot;UNIT_TYPE&quot; 
-##  [9] &quot;CREATED_BY&quot; &quot;METADATA&quot;   &quot;PARKNAME&quot;   &quot;geometry&quot;</code></pre>
-<p>Take note of the last column - <code>geometry</code>. That’s where the geometry is saved (we’ll come back to that later).</p>
-</div>
-<div id="basic-plotting-sf-objects" class="slide section level1">
-<h1>Basic plotting sf objects</h1>
-<p>To plot just the geometry of a sf object (i.e., no symbology from the attribute table), we can use the <code>st_geometry()</code> function.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">## Plot the geometry (outline) of the Yosemite boundary</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">plot</span>(yose_bnd_ll <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">asp=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="importing-vector_files/figure-slidy/plot_yose_bnd_ll-1.png" width="768" /></p>
-<div class="tip">
-<p>We add <code>%&gt;% st_geometry()</code> to indicate we want to plot the polygon with a single color/fill (more on that later).</p>
-<p>The <code>asp=1</code> argument sets the aspect ratio. It is optional but generally a good idea for spatial data.</p>
-</div>
-</div>
-<div id="import-a-kml" class="slide section level1">
-<h1>Import a KML</h1>
-<p>kml &amp; kmz files can have more than one layer. Hence the source is the kml file, and you must specify the layer by name.</p>
-<p>Let’s import a kml containing the <a href="../datasets.html#yose_historic_pts" target="_blank">National Register of Historic Places in Yosemite</a> in Yosemite.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">## Import KML file</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>kml_fn &lt;-<span class="st"> &quot;./data/yose_historic_pts.kml&quot;</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">file.exists</span>(kml_fn)</span>
-<span id="cb13-4"><a href="#cb13-4"></a></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">## View the layers in this kml</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="kw">st_layers</span>(kml_fn)</span>
-<span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="co">## Import the &#39;yosem_historic_places&#39; layer </span></span>
-<span id="cb13-9"><a href="#cb13-9"></a>yose_hp &lt;-<span class="st"> </span><span class="kw">st_read</span>(kml_fn, <span class="dt">layer=</span><span class="st">&quot;yose_historic_places&quot;</span>)</span>
-<span id="cb13-10"><a href="#cb13-10"></a></span>
-<span id="cb13-11"><a href="#cb13-11"></a><span class="co">## View properties</span></span>
-<span id="cb13-12"><a href="#cb13-12"></a>yose_hp</span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-<pre><code>## Driver: KML 
-## Available layers:
-##             layer_name geometry_type features fields
-## 1 yose_historic_places         Point       35      2</code></pre>
-<pre><code>## Reading layer `yose_historic_places&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data\yose_historic_pts.kml&#39; using driver `KML&#39;
-## Simple feature collection with 35 features and 2 fields
-## geometry type:  POINT
-## dimension:      XY
-## bbox:           xmin: -119.8447 ymin: 37.51356 xmax: -119.2165 ymax: 38.08368
-## geographic CRS: WGS 84</code></pre>
-<pre><code>## Simple feature collection with 35 features and 2 fields
-## geometry type:  POINT
-## dimension:      XY
-## bbox:           xmin: -119.8447 ymin: 37.51356 xmax: -119.2165 ymax: 38.08368
-## geographic CRS: WGS 84
-## First 10 features:
-##                                  Name Description                   geometry
-## 1  Hetch Hetchy Railroad Engine No. 6              POINT (-119.786 37.67437)
-## 2             Hodgdon Homestead Cabin              POINT (-119.656 37.53924)
-## 3                       Rangers&#39; Club             POINT (-119.5883 37.74735)
-## 4                    Buck Creek Cabin             POINT (-119.4897 37.56131)
-## 5               Wawona Covered Bridge              POINT (-119.656 37.53859)
-## 6             Crane Flat Fire Lookout             POINT (-119.8207 37.75978)
-## 7      Glacier Point Trailside Museum             POINT (-119.5731 37.72916)
-## 8                      McCauley Cabin             POINT (-119.3676 37.87812)
-## 9                  Bagby Stationhouse             POINT (-119.7862 37.67439)
-## 10                  Great Sierra Mine              POINT (-119.2688 37.9276)</code></pre>
-<div class="infobox">
-<p>Limitations with kml files</p>
-<p><strong>kmz</strong> files are simply zipped <strong>kml</strong> files. Unfortunately you can <em>not</em> import a kmz file with <code>st_read()</code> (at least not on Windows). Unzip it first (which you can do in R if needed) and then import the <em>doc.kml</em> file.</p>
-<p>Unfortunately, <code>st_read()</code> can not currently import the attribute table from a kml file on Windows (<a href="https://github.com/r-spatial/sf/issues/499" target="_blank">more info</a>).</p>
-<p>☞ Stay away from kml/kmz files if possible!</p>
-</div>
-</div>
-<div id="plotting-multiple-layers" class="slide section level1">
-<h1>Plotting multiple layers</h1>
-<p>To overlay more than one layer on a plot:</p>
-<div class="indented1">
+<div id="spatial-data-file-formats" class="slide section level1">
+<h1>Spatial Data File Formats</h1>
+<h2 id="shapefiles">Shapefiles</h2>
+<div class="compact">
 <ul>
-<li>both layers must have the same CRS (<code>plot()</code> does not reproject on the fly)<br />
+<li>Old format dating back to the early 90s<br />
 </li>
-<li>include <code>add=TRUE</code> to the plot statements</li>
+<li>Originally from ESRI</li>
+<li>Well-supported by nearly all GIS software<br />
+</li>
+<li>Actually requires 4-9 files with extensions *.shp, *.shx, *.prj, *.dbf, etc.<br />
+</li>
+<li>Column names in attribute table limited to 10 characters<br />
+</li>
+<li>Better options available today<br />
+</li>
+<li><code>st_read()</code>: source is the Shapefile name; layer can be omitted</li>
 </ul>
 </div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">## Plot the boundary</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">plot</span>(yose_bnd_ll <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">asp=</span><span class="dv">1</span>)</span>
-<span id="cb18-3"><a href="#cb18-3"></a></span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="co">## Add historic places</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="kw">plot</span>(yose_hp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">add=</span><span class="ot">TRUE</span>)</span></code></pre></div>
-<p><img src="importing-vector_files/figure-slidy/plot_ynp_hp_klippy-1.png" width="768" /></p>
+<p><br />
+</p>
+<h2 id="kml-kmz">KML &amp; KMZ</h2>
+<div class="compact">
+<ul>
+<li>made popular with Google Earth<br />
+</li>
+<li>data and symbology are stored in one file<br />
+</li>
+<li>kmz files are simply zipped kml files<br />
+</li>
+<li>kml &amp; kmz files can have more than one layer</li>
+<li>limitations:</li>
+</ul>
+<div class="indented2">
+<ul>
+<li>kmls support geographic coordinates only<br />
+</li>
+<li>you can <em>not</em> import a kmz file with <code>st_read()</code> (at least not on Windows). Unzip it first then import the <em>doc.kml</em> file<br />
+</li>
+<li><code>st_read()</code> can not currently import the attribute table from a kml file on Windows (<a href="https://github.com/r-spatial/sf/issues/499" target="_blank">more info</a>)<br />
+</li>
+<li>☞ Stay away from kml/kmz files if possible!<br />
+</li>
+</ul>
 </div>
-<div id="import-a-geojson-file" class="slide section level1">
-<h1>Import a GeoJSON file</h1>
-<p><a href="https://geojson.org" target="_blank">GeoJSON</a> is a good alternative to the Shapefile and KML formats. GeoJSON typically stores one vector layer in one file, encoded in an open format that can be read in a text editor.</p>
-<p>Import the California county boundaries, which is saved as a GeoJSON file.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">## Import a Geojson file</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>counties_fn &lt;-<span class="st"> &quot;./data/ca_counties.geojson&quot;</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">file.exists</span>(counties_fn)</span>
-<span id="cb19-4"><a href="#cb19-4"></a></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="co">## View the layers </span></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="kw">st_layers</span>(counties_fn)</span>
-<span id="cb19-7"><a href="#cb19-7"></a></span>
-<span id="cb19-8"><a href="#cb19-8"></a><span class="co">## Import the &#39;yosem_historic_places&#39; layer </span></span>
-<span id="cb19-9"><a href="#cb19-9"></a>ca_counties_ll &lt;-<span class="st"> </span><span class="kw">st_read</span>(counties_fn)</span>
-<span id="cb19-10"><a href="#cb19-10"></a></span>
-<span id="cb19-11"><a href="#cb19-11"></a><span class="co">## Plot</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="kw">plot</span>(ca_counties_ll <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">asp=</span><span class="dv">1</span>, <span class="dt">axes=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<ul>
+<li><code>st_read()</code>: source is the kml file; layer name is the name of a layer (required)</li>
+</ul>
 </div>
-<div id="import-from-a-geodatabase" class="slide section level1">
-<h1>Import from a Geodatabase</h1>
-<p>You can import (but not write to) an ESRI <strong>file geodatabase</strong> using the <strong>sf</strong> package. In this case, the source is the folder containing the geodatabase.</p>
-<p>Let’s import the <a href="../datasets.html#yose_trails">Yosemite’s trails</a> from a geodatabase.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">## Define the path to the file geodatabase (a folder)</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>gdb_fn &lt;-<span class="st"> &quot;./data/yose_trails.gdb&quot;</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">file.exists</span>(gdb_fn)</span>
-<span id="cb20-4"><a href="#cb20-4"></a></span>
-<span id="cb20-5"><a href="#cb20-5"></a><span class="co">## View the layers in this source</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a><span class="kw">st_layers</span>(gdb_fn)</span>
-<span id="cb20-7"><a href="#cb20-7"></a></span>
-<span id="cb20-8"><a href="#cb20-8"></a><span class="co">## Import the &#39;Trails&#39; layer  (case sensitive!)</span></span>
-<span id="cb20-9"><a href="#cb20-9"></a>yose_trails &lt;-<span class="st"> </span><span class="kw">st_read</span>(gdb_fn, <span class="dt">layer=</span><span class="st">&quot;Trails&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-<pre><code>## Driver: OpenFileGDB 
-## Available layers:
-##                layer_name     geometry_type features fields
-## 1              Trailheads             Point       73      5
-## 2                  Trails Multi Line String     1074     13
-## 3 Wilderness_stock_routes Multi Line String       11      6
-## 4           Winter_trails Multi Line String       24      5
-## 5          T_1_DirtyAreas     Multi Polygon        1      3
-## 6         T_1_PointErrors             Point      260      7
-## 7          T_1_LineErrors Multi Line String        0      8
-## 8          T_1_PolyErrors     Multi Polygon        0      9</code></pre>
-<pre><code>## Reading layer `Trails&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data\yose_trails.gdb&#39; using driver `OpenFileGDB&#39;
-## Simple feature collection with 1074 features and 13 fields
-## geometry type:  MULTILINESTRING
-## dimension:      XY
-## bbox:           xmin: 245134 ymin: 4153668 xmax: 323239.7 ymax: 4250703
-## projected CRS:  NAD83 / UTM zone 11N</code></pre>
-<div class="infobox">
-<p>You can <em>write</em> to a geodatabase with the R-ArcGIS Bridge, if you have licensed copy of ArcGIS installed.</p>
-<p>Open source equivalents of ERSI’s propietary Geodatabase format include <a href="https://www.geopackage.org/" target="_blank">GeoPackage</a>, <a href="https://postgis.net/" target="_blank">PostGIS</a>, and <a href="https://en.wikipedia.org/wiki/SpatiaLite" target="_blank">SpatiaLite</a>.</p>
+<p><br />
+</p>
+<h2 id="geojson">GeoJSON</h2>
+<div class="compact">
+<ul>
+<li><a href="https://geojson.org" target="_blank">GeoJSON</a> is a good alternative to the Shapefile and KML formats</li>
+<li>Supports all major geometry types, projections, attribute fields, etc.<br />
+</li>
+<li>GeoJSON typically stores <strong>one vector layer</strong> in <strong>one file</strong> that ends in .geojson (thus not very compact)<br />
+</li>
+<li>Format is plain text; can open and read in a text editor<br />
+</li>
+<li><code>st_read()</code>: the source is the *.geojson file; layer is the name of the layer (optional if only 1 layer exists)</li>
+</ul>
 </div>
-<h2 id="plot-yosemites-trails">Plot Yosemite’s Trails</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">## Plot the trails layer</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_trails), <span class="dt">axes=</span><span class="ot">TRUE</span>)</span></code></pre></div>
-<p><img src="importing-vector_files/figure-slidy/plot_trails_klippy-1.png" width="768" /></p>
-<div class="tryit">
-<p>The following code does <strong>not</strong> work to make a plot of the park boundary and the trails. Can you tell why?</p>
-<div class="indented1 indented1-r">
-<div class="sourceCode" id="cb25"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">plot</span>(yose_bnd_ll <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>())</span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">plot</span>(yose_trails <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">add=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><br />
+</p>
+<h2 id="file-geodatabase">File Geodatabase</h2>
+<div class="compact">
+<ul>
+<li>Proprietary spatial database format from ESRI</li>
+<li>On disk is a folder with a .gdb extension<br />
+</li>
+<li>Supports all major feature types, projections, attribute tables, etc.<br />
+</li>
+<li>You can import (but not write to) a file geodatabase using the <strong>sf</strong> package</li>
+<li>You can <em>write</em> to a geodatabase with the R-ArcGIS Bridge, if you have licensed copy of ArcGIS installed.<br />
+</li>
+<li><code>st_read()</code>: the source is the folder containing the geodatabase; layer is the name of a layer (required)</li>
+</ul>
 </div>
-<p><span id="soln_bhgkbo" class="showhidesoln" onclick="showHide(&#39;bhgkbo&#39;);return false;">[Answer]</span></p>
-<div id="bhgkbo" class="hint">
-<p>Because they’re in different projections! We’ll deal with that soon.</p>
-</div>
-</div>
-</div>
-<div id="import-from-a-geopackage" class="slide section level1">
-<h1>Import from a GeoPackage</h1>
+<p><br />
+</p>
+<h2 id="geopackage">GeoPackage</h2>
 <p><img src="images/geopkg200x150.png" style="float:right;"/></p>
 <p><a href="https://www.geopackage.org/" target="_blank">GeoPackage</a> is a relatively new open format for geospatial data. It is <strong>similar</strong> to a file geodatabase in that:</p>
-<div class="indented2">
+<div class="compact">
 <ul>
 <li>it can contain many layers<br />
 </li>
@@ -611,9 +478,9 @@ Your browser does not support iframes.
 </ul>
 </div>
 <p>The GeoPackage is <strong>different</strong> from a file geodatabase in that GeoPackages are:</p>
-<div class="indented2">
+<div class="compact">
 <ul>
-<li>a single file disk with a .gpkg extension (as opposed to a directory)<br />
+<li>a single file disk with a <em>.gpkg</em> extension (as opposed to a directory)<br />
 </li>
 <li>completely open source following a <a href="http://www.opengeospatial.org/" target="_blank">OGC</a> standard<br />
 </li>
@@ -622,107 +489,63 @@ Your browser does not support iframes.
 <li>cross-platform</li>
 </ul>
 </div>
-<p>You import from a GeoPackage using the same functions as any other vector layer: <code>st_layers()</code> and <code>st_read()</code>.</p>
-<p>Let’s import <a href="../datasets.html#yose_watersheds">Yosemite’s watersheds</a> from a geopackage.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">## Import watersheds from a geopackage</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>gpkg_watershd_fn &lt;-<span class="st"> &quot;./data/yose_watersheds.gpkg&quot;</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a><span class="kw">file.exists</span>(gpkg_watershd_fn)</span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="kw">st_layers</span>(gpkg_watershd_fn)</span>
-<span id="cb26-5"><a href="#cb26-5"></a>yose_watersheds &lt;-<span class="st"> </span><span class="kw">st_read</span>(gpkg_watershd_fn, <span class="dt">layer=</span><span class="st">&quot;calw221&quot;</span>)</span>
-<span id="cb26-6"><a href="#cb26-6"></a></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="co">## Plot it</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a><span class="kw">plot</span>(<span class="kw">st_geometry</span>(yose_watersheds), <span class="dt">axes=</span><span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## Driver: GPKG 
-## Available layers:
-##   layer_name geometry_type features fields
-## 1    calw221       Polygon      127     38</code></pre>
-<pre><code>## Reading layer `calw221&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data\yose_watersheds.gpkg&#39; using driver `GPKG&#39;
-## Simple feature collection with 127 features and 38 fields
-## geometry type:  POLYGON
-## dimension:      XY
-## bbox:           xmin: 1383.82 ymin: -61442.93 xmax: 81596.71 ymax: 26405.66
-## projected CRS:  unnamed</code></pre>
-<p><img src="importing-vector_files/figure-slidy/import_watersheds_exec-1.png" width="768" /></p>
-<div class="tryit">
-<p>What CRS are the Yosemite watersheds in?</p>
-<p>[<span id="soln_tvzbct" class="showhidesoln" onclick="showHide(&#39;tvzbct&#39;);return false;">Answer</span>]</p>
-<div id="tvzbct" class="hint">
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>yose_watersheds</span></code></pre></div>
-<pre><code>## Simple feature collection with 127 features and 38 fields
-## geometry type:  POLYGON
-## dimension:      XY
-## bbox:           xmin: 1383.82 ymin: -61442.93 xmax: 81596.71 ymax: 26405.66
-## projected CRS:  unnamed
-## First 10 features:
-##        CALWNUM SWRCBNUM21 HRC HBPA  RBU  RBUA  RBUAS   RBUASP    RBUASPW HR RB HU HA HSA SPWS PWS
-## 1  8631.400101     631.40  NL   NL 8631 86314 863140 86314001 8631400101  8  6 31  4   0    1   1
-## 2  8630.400204     630.40  NL   NL 8630 86304 863040 86304002 8630400204  8  6 30  4   0    2   4
-## 3  8631.400104     631.40  NL   NL 8631 86314 863140 86314001 8631400104  8  6 31  4   0    1   4
-## 4  6536.510101     536.51  SJ   SJ 6536 65365 653651 65365101 6536510101  6  5 36  5   1    1   1
-## 5  6536.600801     536.60  SJ   SJ 6536 65366 653660 65366008 6536600801  6  5 36  6   0    8   1
-## 6  8630.400301     630.40  NL   NL 8630 86304 863040 86304003 8630400301  8  6 30  4   0    3   1
-## 7  8630.400302     630.40  NL   NL 8630 86304 863040 86304003 8630400302  8  6 30  4   0    3   2
-## 8  8630.400400     630.40  NL   NL 8630 86304 863040 86304004 8630400400  8  6 30  4   0    4   0
-## 9  8630.400306     630.40  NL   NL 8630 86304 863040 86304003 8630400306  8  6 30  4   0    3   6
-## 10 6536.600701     536.60  SJ   SJ 6536 65366 653660 65366007 6536600701  6  5 36  6   0    7   1
-##            HRNAME         RBNAME       HBPANAME            HUNAME                  HANAME     HSANAME
-## 1  North Lahontan       Lahontan North Lahontan WEST WALKER RIVER Upper West Walker River   undefined
-## 2  North Lahontan       Lahontan North Lahontan EAST WALKER RIVER East Walker Tributaries   undefined
-## 3  North Lahontan       Lahontan North Lahontan WEST WALKER RIVER Upper West Walker River   undefined
-## 4     San Joaquin Central Valley    San Joaquin    TUOLUMNE RIVER            Cherry Creek Mercut Peak
-## 5     San Joaquin Central Valley    San Joaquin    TUOLUMNE RIVER            Hetch Hetchy   undefined
-## 6  North Lahontan       Lahontan North Lahontan EAST WALKER RIVER East Walker Tributaries   undefined
-## 7  North Lahontan       Lahontan North Lahontan EAST WALKER RIVER East Walker Tributaries   undefined
-## 8  North Lahontan       Lahontan North Lahontan EAST WALKER RIVER East Walker Tributaries   undefined
-## 9  North Lahontan       Lahontan North Lahontan EAST WALKER RIVER East Walker Tributaries   undefined
-## 10    San Joaquin Central Valley    San Joaquin    TUOLUMNE RIVER            Hetch Hetchy   undefined
-##                      CDFSPWNAME             CDFPWSNAME    ACRES    HUC_8        HUC_8_NAME HUC_8_ALT2
-## 1  Headwaters West Walker River          Cascade Creek  6083.05 16050302 WEST_WALKER-CA,NV          0
-## 2                 Buckeye Creek    Upper Buckeye Creek  9890.68 16050301 EAST_WALKER-CA,NV          0
-## 3  Headwaters West Walker River         Kirkwood Creek  6770.62 16050302 WEST_WALKER-CA,NV          0
-## 4              Huckleberry Lake East Fork Cherry Creek 12641.80 18040009    UPPER_TUOLUMNE          0
-## 5                   Falls Creek Upper Jack Main Canyon  8838.88 18040009    UPPER_TUOLUMNE          0
-## 6                    Twin Lakes            Horse Creek  7698.36 16050301 EAST_WALKER-CA,NV          0
-## 7                    Twin Lakes           Cattle Creek 10778.60 16050301 EAST_WALKER-CA,NV          0
-## 8                   Green Creek              undefined 12459.80 16050301 EAST_WALKER-CA,NV          0
-## 9                    Twin Lakes    Little Slide Canyon  6099.80 16050301 EAST_WALKER-CA,NV          0
-## 10              Rancheria Creek        Thompson Canyon  9108.38 18040009    UPPER_TUOLUMNE          0
-##    HUC_8_ALT3    DWRNUM20         DWRHUNAME               DWRHANAME  DWRHSANAME    CDFNUM22 CASE_ RuleID
-## 1           0 8631.400101 WEST WALKER RIVER Upper West Walker River   undefined 8631.400101  6043     11
-## 2           0 8630.400204 EAST WALKER RIVER East Walker Tributaries   undefined 8630.400204  6022     10
-## 3           0 8631.400104 WEST WALKER RIVER Upper West Walker River   undefined 8631.400104  6046     11
-## 4           0 6536.510101    TUOLUMNE RIVER            Cherry Creek Mercut Peak 6536.510101  4765    104
-## 5           0 6536.600801    TUOLUMNE RIVER            Hetch Hetchy   undefined 6536.600801  4815    104
-## 6           0 8630.400301 EAST WALKER RIVER East Walker Tributaries   undefined 8630.400301  6023     10
-## 7           0 8630.400302 EAST WALKER RIVER East Walker Tributaries   undefined 8630.400302  6024     10
-## 8           0 8630.400400 EAST WALKER RIVER East Walker Tributaries   undefined 8630.400400  6029     10
-## 9           0 8630.400306 EAST WALKER RIVER East Walker Tributaries   undefined 8630.400306  6028     10
-## 10          0 6536.600701    TUOLUMNE RIVER            Hetch Hetchy   undefined 6536.600701  4807    104
-##    Shape_Leng Shape_Area                           geom
-## 1    30867.64   24617751 POLYGON ((39955.35 26405.66...
-## 2    29692.64   40027025 POLYGON ((48360.46 21410.36...
-## 3    25629.17   27400329 POLYGON ((41178.45 21036.4,...
-## 4    55741.97   51160710 POLYGON ((32269.54 20892.96...
-## 5    31653.39   35770470 POLYGON ((35285.94 18614.35...
-## 6    31428.37   31154844 POLYGON ((51733.02 18347.97...
-## 7    29562.53   43620499 POLYGON ((55936.4 18119.57,...
-## 8    48098.49   50424283 POLYGON ((66834.96 17741.56...
-## 9    27669.78   24685535 POLYGON ((50494.98 16876.24...
-## 10   35837.74   36861121 POLYGON ((43466.39 15993.69...</code></pre>
-<p>Ans. California Equal Albers (a common projection for statewide data in California)</p>
+<p><code>st_read()</code>: source is the path to the **.gpkg* file; layer is the name of a layer (required)</p>
+<p><br />
+</p>
+<h2 id="spatial-databases">Spatial Databases</h2>
+<div class="indented2">
+<p><a href="https://postgis.net/" target="_blank" rel="noopener">PostGIS</a> - see <a href="https://cran.r-project.org/package=rpostgis" target="_blank" rel="noopener"><code>rpostgis</code></a></p>
+<p><a href="https://en.wikipedia.org/wiki/SpatiaLite" target="_blank" rel="noopener">SpatiaLite</a> - see <a href="https://github.com/pschmied/RSQLite.spatialite" target="_blank" rel="noopener"><code>RSQLite.spatialite</code></a></p>
 </div>
 </div>
+<div id="basic-plotting-sf-objects" class="slide section level1">
+<h1>Basic Plotting sf Objects</h1>
+<p>To plot just the geometry of a sf object (i.e., no symbology from the attribute table), use <code>st_geometry()</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>yose_bnd_ll &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="dt">dsn=</span><span class="st">&quot;./data&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;yose_boundary&quot;</span>, <span class="dt">quiet=</span><span class="ot">TRUE</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">## Plot the geometry (outline) of the Yosemite boundary</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">plot</span>(yose_bnd_ll <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">asp=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="importing-vector_files/figure-slidy/plot_yose_bnd_ll-1.png" width="768" /></p>
+<div class="tip">
+<p>We add <code>%&gt;% st_geometry()</code> to indicate we want to plot the polygon with a single color/fill (more on that later).</p>
+<p>The <code>asp=1</code> argument sets the aspect ratio. It is optional but generally a good idea for spatial data.</p>
 </div>
-<div id="exercise" class="slide section level1">
-<h1>Exercise</h1>
-<p>Look at the other GIS files in the workshop <a href="../datasets.html" target="_blank">data folder</a>. Select one, import it, and plot it.</p>
+</div>
+<div id="overlaying-layers" class="slide section level1">
+<h1>Overlaying Layers</h1>
+<p>To overlay more than one layer on a plot:</p>
+<div class="indented1">
+<ul>
+<li>both layers must have the <strong>same CRS</strong> (<code>plot()</code> does not reproject on the fly)<br />
+</li>
+<li>include <strong><code>add=TRUE</code></strong> to the second (and all subsequent) plot() statements</li>
+</ul>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">## Import the &#39;yosem_historic_places&#39; layer </span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>yose_hp_ll &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;./data/yose_historic_pts.kml&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;yose_historic_places&quot;</span>, <span class="dt">quiet=</span><span class="ot">TRUE</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">## Plot the boundary</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">plot</span>(yose_bnd_ll <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">asp=</span><span class="dv">1</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">## Add historic places</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">plot</span>(yose_hp_ll <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_geometry</span>(), <span class="dt">add=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="importing-vector_files/figure-slidy/plot_ynp_hp-1.png" width="768" /></p>
+</div>
+<div id="r-notebook-exercise" class="slide section level1">
+<h1>R Notebook Exercise</h1>
+<p>Open <em>nb04_import-gis-data.Rmd</em></p>
+<div class="indented2">
+<ul>
+<li>If you don’t have it, you can get it <a href="https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb04_import-gis-data.Rmd" target="_blank" rel="noopener">here</a> (start a new script in RStudio then copy-paste contents)
+</div></li>
+</ul>
 </div>
 <div id="summary" class="slide section level1">
 <h1>Summary</h1>
 <p>We just saw how to:</p>
 <div class="compact">
 <ul>
-<li>import from Shapefiles, KMLs, ESRI file geodatabases, and GeoPackages
+<li>import from Shapefiles, KMLs, GeoJson files, geodatabases, and GeoPackages
 <ul>
 <li><code>st_layers()</code> views the layer names<br />
 </li>
