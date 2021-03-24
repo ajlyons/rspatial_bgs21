@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Plotting 101 " />
+  <meta name="author" content="Session 2 Review  " />
   <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-bgs21 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ajlyons.github.io/rspatial_bgs21 '> https://ajlyons.github.io/rspatial_bgs21 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
   <title>Spatial Data Analysis with R  BayGeo, Spring 2021</title>
@@ -217,12 +217,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
   <script src="lib/slidy-2/scripts/slidy.js"></script>
   <script src="lib/slidy_shiny-1/slidy_shiny.js"></script>
-  <script src="lib/clipboard-1.7.1/clipboard.min.js"></script>
-  <link href="lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
-  <link href="lib/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
-  <script src="lib/klippy-0.0.0.9500/js/klippy.min.js"></script>
-  <script src="lib/kePrint-0.0.1/kePrint.js"></script>
-  <link href="lib/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
    href="../css/slidy_styles.css" />
   <meta name="duration" content="0" />
@@ -231,112 +225,147 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="slide titlepage">
   <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span><br/><span class="course-subtitle">BayGeo, Spring 2021</span></h1>
   <p class="author">
-Plotting 101<br/><img src='images/plot101_cover_580x244x256.png'/>
+Session 2 Review <br/><img src='images/computer_review_414x300.png'/>
   </p>
 </div>
-<div id="base-r-plotting-functions" class="slide section level1">
-<h1>Base R Plotting Functions</h1>
-<script type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
-<script>
-  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
-</script>
-<p>While there are <em>many</em> plotting packages, plotting functions in Base R include:</p>
-<p><tt>plot()</tt><br />
-<tt>plot(…, add=TRUE)</tt> <em>overlays more data on the last plot</em><br />
-<tt>hist()</tt><br />
-<tt>barplot()</tt><br />
-<tt>boxplot()</tt></p>
-<div class="infobox">
-<p>‘<strong>Base R</strong>’ refers to the functions available when you first install R (as opposed to functions in additional packages you install later.)</p>
-<p>The terms <em>Plot</em> and <em>graph</em> are generally used interchangably.</p>
-</div>
-<div class="tryit">
-<p>Generate these plots. What do the <tt>pch</tt> and <tt>cex</tt> arguments do?</p>
-<div class="indented1 indented1-r">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="dv">1</span>)</span></code></pre></div>
-</div>
-<p><span id="soln_ntveye" class="showhidesoln" onclick="showHide(&#39;ntveye&#39;);return false;">[Solution]</span></p>
-<div id="ntveye" class="hint">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="plotting101_files/figure-slidy/plot_exercise_ans-1.png" width="768" /></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">plot</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">pch=</span><span class="dv">5</span>, <span class="dt">cex=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="plotting101_files/figure-slidy/plot_exercise_ans-2.png" width="768" /></p>
-<p><tt>pch</tt> controls the <strong>symbol shape</strong> (plot character), and <tt>cex</tt> controls the <strong>symbol size</strong> (character extension factor).</p>
-</div>
-</div>
-<div class="tip">
-<p><strong>Top Five Arguments for Plotting Spatial Data</strong></p>
-<table class="tbl_compact">
-<thead>
-<tr>
-<th style="text-align:left;">
-Argument
-</th>
-<th style="text-align:left;">
-Effect on Plot
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;font-family: monospace;">
-asp = 1
-</td>
-<td style="text-align:left;">
-aspect ratio
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-family: monospace;">
-col=“red”
-</td>
-<td style="text-align:left;">
-fill color
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-family: monospace;">
-border=“blue”
-</td>
-<td style="text-align:left;">
-outline color
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-family: monospace;">
-pch=16
-</td>
-<td style="text-align:left;">
-point symbol (16 = round dot)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-family: monospace;">
-axes = TRUE
-</td>
-<td style="text-align:left;">
-draw axes
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="r-notebook-exercise" class="slide section level1">
-<h1>R Notebook Exercise</h1>
-<p>Open <em>nb03b_plotting101.Rmd</em></p>
+<div id="highlights-from-last-time" class="slide section level1">
+<h1>Highlights From Last Time</h1>
+<script language="javascript" type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<h2 id="tabular-data">Tabular Data</h2>
 <div class="indented2">
+
+<p><strong>data frames</strong> and matrices</p>
+<p>several <strong>sample data frames</strong> that come with R (i.e., <code>mtcars</code>, <code>quakes</code>, <code>iris</code>)</p>
+<p>import csv files with <strong><code>read.csv()</code></strong></p>
+<div class="compact">
 <ul>
-<li>If you don’t have it, you can get it <a href="https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb03b_plotting101.Rmd" target="_blank" rel="noopener">here</a> (start a new script in RStudio then copy-paste contents)</li>
+<li>alternative: <code>readr::read_csv()</code><br />
+</li>
+<li>For stubborn data frames, try the <strong><em>Import Dataset</em></strong> button in RStudio<br />
+
+</div></li>
+</ul>
+<p>peek inside a data frame with: <strong><code>head()</code></strong>, <strong><code>nrow()</code></strong>, <strong><code>names()</code></strong>, <strong><code>View()</code></strong>, etc.</p>
+<p>grab a single column with <strong><code>$</code></strong> (example: <code>mtcars$wt</code>)</p>
+<p><strong>subset</strong> row and columns with <strong><tt>my_dataframe[<em>rows-expression</em>, <em>columns-expression</em>]</tt></strong></p>
+<div class="indented2">
+<em>rows-expression</em>, <em>columns-expression</em> can be
+<div class="compact">
+<ul>
+<li>vector of integers (use for sorting also)<br />
+</li>
+<li>an expression that returns TRUE / FALSE values (one for each row)<br />
+</li>
+<li>column names<br />
+</li>
 </ul>
 </div>
 </div>
-<div id="next" class="slide section level1">
-<h1>Next</h1>
+<p><code>dplyr</code> can do all of this and more (and a lot easier)!</p>
+</div>
+<!---- end of Tabular Data section --->
+<p><br />
+</p>
+<h2 id="base-r-plotting">Base R Plotting</h2>
+<div class="indented2">
+<p>Functions for <strong>quick visualization</strong>:</p>
+<div class="compact">
+<ul>
+<li><code>plot()</code><br />
+</li>
+<li><code>plot(…, add=TRUE)</code> <em>- overlays more data on the last plot</em><br />
+</li>
+<li><code>hist()</code><br />
+</li>
+<li><code>boxplot()</code><br />
+</li>
+</ul>
+</div>
+<p>Top five <strong>optional arguments</strong> for <code>plot()</code> for <strong>geospatial data</strong>:</p>
+<div class="compact">
+<ul>
+<li><code>axes = TRUE</code><br />
+</li>
+<li><code>asp = 1</code><br />
+</li>
+<li><code>pch = 16</code></li>
+<li><code>col = 'red'</code></li>
+<li><code>main = 'My Plot Title'</code></li>
+</ul>
+</div>
+<p>For more plotting options look at packages like <code>ggplot2</code>, <code>tmap</code>, etc.,</p>
+<p>See also Bonus slides:</p>
+<div class="indented2">
+<p><a href="plotting-base-pt2.html" target="_blank" rel="noopener"><em>Base R Plotting Part II</em></a></p>
+<p><a href="color.html" target="_blank" rel="noopener"><em>Working with Color</em></a></p>
+</div>
+</div>
+<!---- End of Base R Plotting --->
+<p><br />
+</p>
+<h2 id="importing-and-plotting-vector-data">Importing and Plotting Vector Data</h2>
+<div class="indented2">
+<p>sf data frames are essentially regular data frames with a <strong>‘geometry’</strong> column</p>
+<p><strong>import</strong> GIS data with: <tt>st_read(<em>source</em>, <em>layer</em>)</tt></p>
+<div class="indented2">
+<p>where <em>source</em> can be a:</p>
+<div class="compact">
+<ul>
+<li>a folder (e.g, containing Shapefiles, geodatabase)<br />
+</li>
+<li>file (e.g., geojson file, KML file)<br />
+</li>
+<li>database connection string (e.g., “PG:dbname=postgis”)<br />
+</li>
+</ul>
+</div>
+<p><em>layer</em> is a named layer</p>
+</div>
+<p>view layers in a source with <code>st_layers()</code></p>
+<p>code to import Shapefiles, KMLs, GeoJSON, Geodatabase, GeoPackage</p>
+<p><code>plot()</code> works with sf objects</p>
+<div class="compact">
+<ul>
+<li>to plot just the outline try: <code>plot(ca_counties %&gt;% st_geometry())</code><br />
+</li>
+<li>to alter symbology by an attribute field use <code>plot(ca_counties["col_name"])</code><br />
+</li>
+</ul>
+</div>
+</div>
+<h2 id="common-manipulations-for-sf-objects"><a href="sf-manip.html">Common Manipulations for sf Objects</a></h2>
+<div class="indented2">
+<p>get the <strong>bounding box</strong>: <code>st_bbox()</code></p>
+<p>get the <strong>coordinates</strong> of a point layer as a 2-column matrix: <code>st_coordinates()</code></p>
+<p>view (or assign) the <strong>coordinate reference system</strong>: <code>st_crs()</code></p>
+<p><strong>(re)project</strong> to a different crs: <code>st_transform()</code></p>
+<p>refer to CRS / projections using their <strong>EPSG number</strong></p>
+<p>convert a <strong>regular data frame</strong> to a <strong>sf</strong> object: <code>st_as_sf()</code></p>
+<p><strong>export</strong> sf objects to standard GIS formats: <code>st_write()</code></p>
+</div>
+</div>
+<div id="download-todays-r-notebooks" class="slide section level1">
+<h1>Download Today’s R Notebooks</h1>
+<p>To download the R Notebooks:</p>
+<div class="indented2">
+<ol style="list-style-type: decimal">
+<li><p>Make sure the working directory is where the ‘data’ folder is</p></li>
+<li><p>Run the following:</p></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">## Download R Notebook Rmd file(s) into the current working directory</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>nb_url &lt;-<span class="st"> &quot;https://github.com/ucanr-igis/rspatial_data/raw/master/notebooks_2021-03-23.zip&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>temp_fn &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext=</span><span class="st">&quot;.zip&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">download.file</span>(nb_url, <span class="dt">destfile=</span>temp_fn, <span class="dt">mode=</span><span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">unzip</span>(temp_fn, <span class="dt">exdir =</span> <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">unlink</span>(temp_fn)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Look in the ‘Files’ pane to make sure they’re there!</li>
+</ol>
+</div>
 <p>
 <br/>
 <hr/>
-<strong>Next: </strong> <a href="importing-vector.html">Importing and Plotting Vector Data</a>
+<strong>Next: </strong> <a href="2d-data.html">Working with 2D data</a>
 </p>
 </div>
 

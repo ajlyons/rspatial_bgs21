@@ -288,11 +288,33 @@ your data live in a geodatabase (and you don’t have ArcGIS Desktop)
 <div id="geospatial-data" class="slide section level1">
 <h1>Geospatial Data</h1>
 <h2 id="physical-world-gis-world">Physical World → GIS World</h2>
+<p>Start by chopping up the real world into different “layers” with similar features:</p>
 <p><img src="./images/geospatial_layers_490x456.png" /></p>
+<p><br />
+</p>
+<p>Option 1 is to represent features as “vectors” (points, lines and polygons):</p>
+<p><img src="./images/vectors-features-abstract_600x280x256.png" /></p>
+<p><br />
+</p>
+<p>Option 2 is to represent features as a grid or “raster”:</p>
+<p><img src="./images/raster-features-abstract_600x276x256.png" /></p>
+<h2 id="examples-of-raster-images">Examples of Raster Images</h2>
+<p><strong>Remotely sensed data</strong> and <strong>continuous surfaces</strong> are almost always represented as raster. Examples:</p>
+<p><img src="./images/landsat_fcc_400x400.jpg" /><br/><em>Satellite image</em></p>
+<p><br />
+</p>
+<p><img src="./images/lulc_houston-galveston_2015_660x750.png" /><br/><em>Land cover map (derived from satellite image)</em></p>
+<p><br />
+</p>
+<p><img src="./images/yose_dem_436x550x256.png" /><br/><em>Elevation (measured from Shuttle)</em></p>
+<p><br />
+</p>
+<p><img src="./images/yose_dist-to-trails_486x598.png" /><br/><em>Distance to trails (computed)</em></p>
 </div>
 <div id="projections" class="slide section level1">
 <h1>Projections</h1>
-<p><img src="./images/projection_800x350.png" style="width:600px;" /></p>
+<p>How do we squish a round planet onto flat maps?</p>
+<p><img src="./images/projections_546x676x256.png" /></p>
 <div class="centerblock" style="margin-top:2em;">
 <iframe src="https://www.jasondavies.com/maps/transition/" style="width:1234px;height:732px;">
 <p>
@@ -300,25 +322,48 @@ Your browser does not support iframes.
 </p>
 </iframe>
 </div>
+<p><br />
+</p>
 <h2 id="utm">UTM</h2>
 <p>A common projection system is <strong>Universal Transverse Mercator</strong> (UTM). UTM divides the planet up into 60 zones that are 6 degrees wide. The USA falls in zones 10-19.</p>
 <div class="centerblock">
 <a href="https://commons.wikimedia.org/wiki/File:Utm-zones-USA.svg"><img src="./images/utm-zones-use_640x480.png"></img></a>
 </div>
 <h2 id="what-you-need-to-remember-about-projections-in-r">What You Need to Remember about Projections in R</h2>
-<div class="indented2">
+<div class="compact">
 <ul>
-<li><p>With a couple of exceptions (tmap), R does not reproject on the fly</p></li>
-<li><p>The packages for importing and exporting spatial data know how to read/write projection info</p></li>
-<li><p>If your analysis uses distance or area in any way, you should use projected coordinates (not lat-long)</p></li>
-<li><p>Some web map packages (e.g., leaflet) require lat-long</p></li>
-<li><p>(Re)projecting within R is easy</p></li>
+<li>With rare exceptions (i.e., tmap), R <strong>does not reproject on the fly</strong><br />
+</li>
+<li>The <code>sf</code> package can <strong>read &amp; write projection info</strong> when importing or exporting GIS files<br />
+</li>
+<li>If your analysis uses <strong>distance or area</strong> in any way, you should use <strong>projected coordinates</strong> (not lat-long)</li>
+<li>Some web map packages (e.g., leaflet) <strong>require lat-long</strong></li>
+<li>(Re)projecting is <strong>easy</strong> (with <code>st_transform()</code>)</li>
+<li>The best way to refer to projections is by <strong>EPSG numbers</strong><br />
+</li>
 </ul>
 </div>
-<h2 id="attribute-table">Attribute Table</h2>
+</div>
+<div id="attributes" class="slide section level1">
+<h1>Attributes</h1>
+<p>Every feature has some additional, non-spatial properties, typically called <em>attributes</em>.</p>
+<p><img src="./images/attribute-table_610x282x256.png" /></p>
+<p>Attributes are used for:</p>
+<div class="compact">
+<ul>
+<li>symbology<br />
+</li>
+<li>selecting features (aka, attribute query)<br />
+</li>
+<li>bringing in info from other tables (aka attribute join)<br />
+</li>
+<li>analysis<br />
+</li>
+</ul>
+</div>
 </div>
 <div id="sf-package" class="slide section level1">
-<h1>sf Package</h1>
+<h1><code>sf</code> Package</h1>
 <p><strong><code>sf</code></strong> is a relatively new package for working with vector data. It combines the functionality of the older <strong><code>sp</code></strong> package, as well as select functionality from <strong><code>rgdal</code></strong> and <strong><code>rgeos</code></strong>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(sf)</span></code></pre></div>
 <p><code>sf</code> stands for ‘simple features’, which is a standard (developed by the Open Geospatial Consortium) for storing various geometry types in a hierarchical data model.</p>
@@ -347,8 +392,7 @@ Your browser does not support iframes.
 </div>
 <div id="importing-vector-data" class="slide section level1">
 <h1>Importing Vector Data</h1>
-<h2 id="sources-and-layers">Sources and Layers</h2>
-<p>To import spatial data, you have to specify the <strong>source</strong> and <strong>layer</strong>.</p>
+<p>To import spatial data, you have to specify a <strong>source</strong> and <strong>layer</strong>.</p>
 <p><br />
 </p>
 <p>The <span style="color:green; font-weight:bold;">Source</span> can be a:</p>
@@ -356,17 +400,17 @@ Your browser does not support iframes.
 <p><strong>folder</strong>: <em><code>"./gis_data"</code></em></p>
 <p><strong>geodatabase</strong> (which is really a folder): <em><code>"./gis_data/yose_roads.gdb"</code></em></p>
 <p><strong>file</strong>: <em><code>"trail_heads.kml"</code>, <code>"cell_towers.geojson"</code></em></p>
-<p><strong>database connection</strong>: <em><code>"PG:dbname=postgis"</code></em></p>
+<p><strong>database connection string</strong>: <em><code>"PG:dbname=postgis"</code></em></p>
 </div>
 <div class="infobox">
-<p>In functions, the argument for the source is often named <strong><code>dsn</code></strong> (data source name)</p>
+<p>In <code>sf</code> functions, the argument where you provide the source is often named <strong><code>dsn</code></strong> (data source name)</p>
 </div>
 <p><br />
 </p>
 <p>The <span style="color:green; font-weight:bold;">Layer</span> can be a:</p>
 <div class="indented1">
 <p><strong>Shapefile name</strong> (minus the shp extension)</p>
-<p><strong>layer</strong> name in a database / file</p>
+<p>a named <strong>layer</strong> in the database / file</p>
 </div>
 </div>
 <div id="import-functions" class="slide section level1">
@@ -380,7 +424,7 @@ Your browser does not support iframes.
 <p>Most of the functions in the sf package start with <strong><code>st_</code></strong>, which stands for ‘space time’, and matches the names of similar functions in PostGIS.</p>
 </div>
 <div class="tip">
-<p>To view the metadata of a layer before brining it into R, use <code>rgdal::ogrInfo()</code></p>
+<p>To view the metadata of a layer before bringing it into R, use <code>rgdal::ogrInfo()</code></p>
 </div>
 </div>
 <div id="spatial-data-file-formats" class="slide section level1">
@@ -489,7 +533,7 @@ Your browser does not support iframes.
 <li>cross-platform</li>
 </ul>
 </div>
-<p><code>st_read()</code>: source is the path to the **.gpkg* file; layer is the name of a layer (required)</p>
+<p><code>st_read()</code>: source is the path to the <em>.gpkg</em> file; layer is the name of a layer (required)</p>
 <p><br />
 </p>
 <h2 id="spatial-databases">Spatial Databases</h2>

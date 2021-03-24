@@ -234,19 +234,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Working with 2D Data <br/><img src='images/2d-data-munging_645x160.png'/>
   </p>
 </div>
-<div id="data-frames-matrices-and-tibbles" class="slide section level1">
-<h1>Data Frames, Matrices (and Tibbles)</h1>
+<div id="dplyr" class="slide section level1">
+<h1><code>dplyr</code></h1>
 <script language="javascript" type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
 <script>
   addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
-</div>
-<div id="a-better-way-dplyr" class="slide section level1">
-<h1>A better way: <tt>dplyr</tt></h1>
-<p><a href="../extras/data-transformation.pdf" target="_blank"><img src="images/data-transformation-600x464.png" style="width:600px; height:464px; float:right;"></a></p>
-<p>An alternative way to manipulate or ‘munge’ data frames.</p>
-<p>Part of the <a href="https://www.tidyverse.org" target="_blank">tidyverse</a>.</p>
-<p>Best way to learn: examples + <a href="../extras/data-transformation.pdf" target="_blank">cheat sheet</a>.</p>
+<p>An alternative (usually better) way to manipulate or ‘munge’ data frames</p>
+<p>Part of the <a href="https://www.tidyverse.org" target="_blank">tidyverse</a></p>
+<p>Good way to familiarize yourself with it: explore the <a href="../extras/data-transformation.pdf" target="_blank">cheat sheet</a></p>
+<p><a href="../extras/data-transformation.pdf" target="_blank"><img src="images/data-transformation-600x464.png" style="width:600px;"></a></p>
 </div>
 <div id="piping" class="slide section level1">
 <h1>Piping</h1>
@@ -260,7 +257,29 @@ fun_a(x, ...) %>% fun_b(x, ...) %>% fun_c(x, ...) %>%* ...
             │           ↑     │           ↑ 
             └───────────┘     └───────────┘
 </pre>
-<h3 id="common-dplyr-functions">Common <tt>dplyr</tt> functions</h3>
+<p>So the following are <em>equivalent</em>:</p>
+<div class="indented2" style="font-family:monospace">
+<p>st_transform(ca_counties, 4326)</p>
+<p>ca_counties %&gt;% st_transform(4326)</p>
+</div>
+<p><br />
+</p>
+<p>Piping makes reading and writing <strong>nested expressions</strong> a lot easier!</p>
+<p>The following are also <em>equivalent</em>:</p>
+<div class="indented2" style="font-family:monospace">
+<p>plot(st_geometry(st_transform(ca_counties, 4326)))</p>
+<p>ca_counties %&gt;%<br />
+  st_transform(4326) %&gt;%<br />
+  st_geometry() %&gt;%<br />
+  plot()</p>
+</div>
+<div class="tip">
+<p><em>ctrl</em> + <em>shift</em> + <em>m</em> is the RStudio keyboard shortcut to insert: <code>%&gt;%</code></p>
+</div>
+<!--- tip --->
+</div>
+<div id="useful-dplyr-functions" class="slide section level1">
+<h1>Useful <code>dplyr</code> functions</h1>
 <table class="tbl_compact">
 <tbody>
 <tr>
@@ -527,7 +546,6 @@ iris %>% filter(Sepal.Length > 7) %>% mutate(width_length = Sepal.Width * Sepal.
 <!--- TryIt --->
 <div class="infobox">
 <p>When passed regular data frames, <tt>dplyr</tt> functions return <em>tibble</em> objects, which are essentially data frames with a couple of minor tweaks.</p>
-<p><em>ctrl + shift + m </em> is the RStudio keyboard shortcut to insert: <tt><strong>%&gt;%</strong></tt></p>
 <p>For more examples, see the <a href="../extras/data-transformation.pdf" target="_blank">dplyr Cheat Sheet</a></p>
 </div>
 <!--- InfoBox --->
@@ -599,22 +617,44 @@ iris %>% filter(Sepal.Length > 7) %>% mutate(width_length = Sepal.Width * Sepal.
 </div>
 <!--- info-box --->
 </div>
+<div id="reshaping-data" class="slide section level1">
+<h1>Reshaping Data</h1>
+<p><img src="images/tidyr_240x277.png" style="float:right; width:140px;" /></p>
+<p><em>reshaping</em> data includes</p>
+<div class="compact">
+<ul>
+<li>turning rows into columns (aka pivot tables, cross tab query)<br />
+</li>
+<li>turning columns into rows</li>
+</ul>
+</div>
+<p>Go-to package for reshaping data frames is <a href="https://tidyr.tidyverse.org" target="_blank" rel="noopener"><tt><strong>tidyr</strong></tt></a></p>
+<p>Two of the most common reshaping functions include:</p>
+<div class="indented2">
+<p><em><code>pivot_longer()</code></em><br />
+<img src="images/pivot_longer_566x212x256.png" /></p>
+<p><em><code>pivot_wider()</code></em><br />
+<img src="images/pivot_wider_674x336x256.png" /></p>
+</div>
+<p>These and other reshaping functions are described on page 2 of the <a href="https://rawgit.com/rstudio/cheatsheets/master/data-import.pdf" target="_blank" rel="noopener"><strong>Data Import Cheatsheet</strong></a>.</p>
+<p><img src="images/data-import-cheatsheet-pg2_900x698x256.png" /></p>
+</div>
 <div id="summary" class="slide section level1">
 <h1>Summary</h1>
 <p>Today we saw:</p>
 <div class="compact">
 <ul>
-<li>the differences between data frames and matrices<br />
-</li>
-<li>functions to view the properties of a data frame<br />
-</li>
-<li>how to use square bracket notation to extract specifc rows and columns from a data frame<br />
-</li>
-<li>how to pipe together functions from <tt>dplyr</tt> to munge data<br />
-</li>
-<li>how to summarise values for groups of rows from a data frame</li>
-<li>how to import a csv file</li>
+<li>how to pipe together functions from <code>dplyr</code> to munge data, including:</li>
 </ul>
+<div class="indented2 compact">
+<ul>
+<li>filtering rows and columns</li>
+<li>grouping and summarings rows<br />
+</li>
+<li>adding new columns<br />
+</li>
+</ul>
+</div>
 </div>
 <div class="infobox">
 <p><strong>Additional Resources</strong></p>
