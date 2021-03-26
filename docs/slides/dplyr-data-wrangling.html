@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Working with 2D Data  " />
+  <meta name="author" content="Manipulating tables with dplyr  " />
   <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-bgs21 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ajlyons.github.io/rspatial_bgs21 '> https://ajlyons.github.io/rspatial_bgs21 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
   <title>Spatial Data Analysis with R  BayGeo, Spring 2021</title>
@@ -231,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="slide titlepage">
   <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span><br/><span class="course-subtitle">BayGeo, Spring 2021</span></h1>
   <p class="author">
-Working with 2D Data <br/><img src='images/2d-data-munging_645x160.png'/>
+Manipulating tables with dplyr <br/><img src='images/2d-data-munging_645x160.png'/>
   </p>
 </div>
 <div id="dplyr" class="slide section level1">
@@ -616,6 +616,15 @@ iris %>% filter(Sepal.Length > 7) %>% mutate(width_length = Sepal.Width * Sepal.
 <p>There are several variants of <tt>left_join()</tt>, the most common being <tt><strong>right_join()</strong></tt> and <tt><strong>inner_join()</strong></tt>. See help for details.</p>
 </div>
 <!--- info-box --->
+</div>
+<div id="r-notebook-exercise" class="slide section level1">
+<h1>R Notebook Exercise</h1>
+<p>Open <em>nb_dplyr.Rmd</em></p>
+<div class="indented2">
+<ul>
+<li>If you don’t have it, you can get it <a href="https://raw.githubusercontent.com/UCANR-IGIS/rspatial_data/master/nb_dplyr.Rmd" target="_blank" rel="noopener">here</a> (start a new script in RStudio then copy-paste contents)
+</div></li>
+</ul>
 </div>
 <div id="reshaping-data" class="slide section level1">
 <h1>Reshaping Data</h1>

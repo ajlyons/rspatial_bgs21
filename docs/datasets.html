@@ -21,6 +21,8 @@
 <script src="slides/lib/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="slides/lib/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="slides/lib/navigation-1.1/tabsets.js"></script>
+<link href="slides/lib/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="slides/lib/highlightjs-9.12.0/highlight.js"></script>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACkUlEQVQ4jX2SW0jTcRTHTzNyeZlh6lqmm3POdNPC6SxSEzaqafkykOFoIxTDWpKRFV6iQMNLFyMSsQvUW0WORc2WWBmGKEGZXUyz0NrmNmfa1PYgfHsQ1v5oHjgvX875/M45vy/R8mDJ9caxrFIL5CUWJB00Q9n+7Q+l1BetUMuMTL3JpTB0QVnejd1Hu9DQ60G5eQbqB7PIvj0L2bUZ0KZzghWbs0o7Fx3Tc/B6vStm6+g0wrQvIKh2gKKyUxnNSZoO685SC1YDeL1e9Ll+Ia7WCd5pJ4hojQ8g1nViezETYBqZx93BOdwa9jAgsdUT4J6ZQqC6f4GIiLYU9/RzNWYIdU9hd/8rLjN7UGT8DbWROVVMlQsBBWas142DiIikdfbFMF0POIVm2NzM1zwLS+mvcSsnEajpBSv/8RIgucGJ1EYXEs+NwjrlWfUGMee/Y2PFJIJLrFibex8kOsahhCYnUlpnIL1kh9X9/yMKG2yIOOlAsPYnAveZsE75EEQUQLwTwy5Rsxvx9UxApKEPEYY+BiSizA623oaggkdgq4xLKwRLq7i8sy6EFlpg8wNEVwyAd3wAbZ8cPu3CazeCC/sRojYjaL8Jvm8MPWLDBm03A8CveQ9+7RBia4cYU4QfeokwzTOwc6/4OzKXHap/C5ufD0RNo0i4OAZR81dcnnD69Mp3PxBe9GRkuZdFKk7sqTcQ132EpGUMydetSLnpgOSGHVtbxpHU9AX8mkFEG55/ZrjQL1h82V6esPLVh8Sr40i940J6xzzS7s1C0m6HqHEEiTnatgT5gcPijHxltFwhjpRIQpZjBAJ2lFTBFW5TiOPT8mXx6apdcRl5OaJM1Q6hLC9ls3RPTLgok0NELCKiv02kPqt/O1MZAAAAAElFTkSuQmCC" rel="icon" type="image/x-icon" />
 <script language="javascript" type="text/javascript">
 function TriShowHide(shID) {
@@ -100,6 +102,21 @@ if (document.selection) {
   ul.task-list{list-style: none;}
     </style>
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -259,6 +276,14 @@ h2 {
 p {
   font-size: 120%;
 }
+details {
+  margin-left:-1em;
+}
+summary {
+  color:rgb(51, 122, 183); 
+  cursor:pointer; 
+  outline:none;  
+}
 </style>
 <p>The following data are available in the workshop ‘data’ folder, which you can download <a href="https://github.com/ucanr-igis/rspatial_data" target="_blank" rel="noopener">here</a> (click the <img src="images/clone_download_btn_102x32x256.png" width="76" /> button).</p>
 <div id="yosemite-data" class="section level1">
@@ -267,7 +292,11 @@ p {
 <ul>
 <li>Yosemite National Park Boundary<br />
 </li>
-<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2180706" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2180706</a></li>
+<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2180706" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2180706</a>
+<details>
+<summary>import code</summary>
+<pre>yose_bnd_ll <- st_read(dsn="./data", layer="yose_boundary")</pre>
+</details></li>
 </ul>
 <h2 id="yose_firehistory">yose_firehistory.gdb</h2>
 <ul>
@@ -275,7 +304,12 @@ p {
 </li>
 <li>Layers: <em>YNP_FireHistoryPoints</em>, <em>YNP_FireHistoryPolys</em><br />
 </li>
-<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2237598" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2237598</a></li>
+<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2237598" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2237598</a>
+<details>
+<summary>import code</summary>
+<pre>yose_firehist_pts_utm <- st_read("./data/yose_firehistory.gdb", "YNP_FireHistoryPoints")</pre>
+<pre>yose_firehist_poly_utm <- st_read("./data/yose_firehistory.gdb", "YNP_FireHistoryPolys")</pre>
+</details></li>
 </ul>
 <h2 id="yose_communications">yose_communications.gdb</h2>
 <ul>
@@ -283,14 +317,22 @@ p {
 </li>
 <li>Layers: <em>Cell_Towers</em>, <em>Radio_Repeaters</em><br />
 </li>
-<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2170445" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2170445</a></li>
+<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2170445" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2170445</a>
+<details>
+<summary>import code</summary>
+<pre>yose_celltwrs_utm <- st_read("./data/yose_communications.gdb", "Cell_Towers")</pre>
+</details></li>
 </ul>
 <h2 id="yose_roads">yose_roads.gdb</h2>
 <ul>
 <li>A geodatabase of all the roads within the Yosemite area. Includes paved and unpaved roads. Roads are categorized by type and access.<br />
 </li>
 <li>Layers: <em>Yosemite_Roads</em></li>
-<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2180725" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2180725</a></li>
+<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2180725" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2180725</a>
+<details>
+<summary>import code</summary>
+<pre>yose_roads_utm <- st_read("./data/yose_roads.gdb", "Yosemite_Roads")</pre>
+</details></li>
 </ul>
 <h2 id="yose_trails">yose_trails.gdb</h2>
 <ul>
@@ -298,13 +340,21 @@ p {
 </li>
 <li>Layers: <em>Trails</em>, <em>Trailheads</em>, <em>Winter_trails</em><br />
 </li>
-<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2180706" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2180706</a></li>
+<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2180706" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2180706</a>
+<details>
+<summary>import code</summary>
+<pre>yose_trails <- st_read("./data/yose_trails.gdb", layer="Trails")</pre>
+</details></li>
 </ul>
 <h2 id="Yosemite_POI">yose_poi.shp</h2>
 <ul>
 <li>Points of Interest (POIs) in Yosemite National Park<br />
 </li>
-<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2225064" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2225064</a></li>
+<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2225064" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2225064</a>
+<details>
+<summary>import code</summary>
+<pre>yose_poi_utm <- st_read(dsn="./data", layer="yose_poi")</pre>
+</details></li>
 </ul>
 <h2 id="yosemite_missing_people">yosemite_missing_people.csv</h2>
 <ul>
@@ -316,7 +366,11 @@ p {
 <ul>
 <li>National Register of Historic Places for Yosemite National Park<br />
 </li>
-<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2190361" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2190361</a></li>
+<li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2190361" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2190361</a>
+<details>
+<summary>import code</summary>
+<pre>yose_hp_ll <- st_read("./data/yose_historic_pts.kml", layer="yose_historic_places")</pre>
+</details></li>
 </ul>
 <h2 id="veg37">veg37.shp</h2>
 <ul>
@@ -334,7 +388,11 @@ p {
 <ul>
 <li>CALWATER 2.2.1 (watersheds)</li>
 <li>Source: <a href="https://frap.fire.ca.gov/mapping/gis-data/" class="uri">https://frap.fire.ca.gov/mapping/gis-data/</a></li>
-<li>Metadata: <a href="https://map.dfg.ca.gov/metadata/calw221_polygon_20131205_wm.html" class="uri">https://map.dfg.ca.gov/metadata/calw221_polygon_20131205_wm.html</a></li>
+<li>Metadata: <a href="https://map.dfg.ca.gov/metadata/calw221_polygon_20131205_wm.html" class="uri">https://map.dfg.ca.gov/metadata/calw221_polygon_20131205_wm.html</a>
+<details>
+<summary>import code</summary>
+<pre>yose_watersheds <- st_read("./data/yose_watersheds.gpkg", layer="calw221")</pre>
+</details></li>
 </ul>
 <h2 id="srtm_13_05">srtm_13_05.tif</h2>
 <ul>
@@ -377,7 +435,11 @@ p {
 <h2 id="ca_counties">ca_counties.geojson</h2>
 <ul>
 <li>County Boundaries in California</li>
-<li>Source: US Census Bureau</li>
+<li>Source: US Census Bureau
+<details>
+<summary>import code</summary>
+<pre>ca_counties_ll <- st_read("./data/ca_counties.geojson")</pre>
+</details></li>
 </ul>
 <h2 id="ca_breweries">ca_breweries.csv</h2>
 <ul>
@@ -423,6 +485,15 @@ $(document).ready(function () {
 <!-- code folding -->
 
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
 </html>
