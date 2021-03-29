@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Session 3 Review  " />
+  <meta name="author" content="Custom Functions  " />
   <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-bgs21 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ajlyons.github.io/rspatial_bgs21 '> https://ajlyons.github.io/rspatial_bgs21 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
   <title>Spatial Data Analysis with R  BayGeo, Spring 2021</title>
@@ -217,8 +217,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
   <script src="lib/slidy-2/scripts/slidy.js"></script>
   <script src="lib/slidy_shiny-1/slidy_shiny.js"></script>
-  <script src="lib/kePrint-0.0.1/kePrint.js"></script>
-  <link href="lib/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <script src="lib/clipboard-1.7.1/clipboard.min.js"></script>
+  <link href="lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+  <link href="lib/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+  <script src="lib/klippy-0.0.0.9500/js/klippy.min.js"></script>
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
    href="../css/slidy_styles.css" />
   <meta name="duration" content="0" />
@@ -227,116 +229,160 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="slide titlepage">
   <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span><br/><span class="course-subtitle">BayGeo, Spring 2021</span></h1>
   <p class="author">
-Session 3 Review <br/><img src='images/computer_review_414x300.png'/>
+Custom Functions <br/><img src='images/blank_10x10.png'/>
   </p>
 </div>
-<div id="highlights-from-last-time" class="slide section level1">
-<h1>Highlights From Last Time</h1>
+<div id="custom-functions" class="slide section level1">
+<h1>Custom Functions</h1>
 <script language="javascript" type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
-<h2 id="piping-syntax">Piping Syntax</h2>
+<script>
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<h2 id="why-write-functions">Why Write Functions?</h2>
+<p>Functions help you:</p>
 <div class="indented2">
-<p><tt>fun_a() <strong>%&gt;%</strong> fun_b() <strong>%&gt;%</strong> fun_c() <strong>%&gt;%</strong> … </tt></p>
-<pre style="background-color:white; border:none;">
-iris %>% filter(Sepal.Length > 7) %>% mutate(width_length = Sepal.Width * Sepal.Length)
-<span style="color:DimGrey;">  │        │                             │
-  │        │                             └─ create a new column
-  │        │
-  │        ├─ select those rows where Sepal.Length > 7
-  │        └─ don't have to specify the data frame
-  │    
-  └ start with this data frame 
-</span></pre>
+<ul>
+<li>reuse your code</li>
+<li>make your scripts easier to write (&amp; read)</li>
+<li>share your work through scripts or packages</li>
+</ul>
 </div>
-<div class="indented2" style="font-family:monospace">
-<p>ca_counties %&gt;%<br />
-  st_transform(4326) %&gt;%<br />
-  st_geometry() %&gt;%<br />
-  plot()</p>
-</div>
-<h2 id="useful-dplyr-functions">Useful <code>dplyr</code> functions</h2>
-<table class="tbl_compact">
-<tbody>
-<tr>
-<td style="text-align:left;width: 12em; ">
-select column(s)
-</td>
-<td style="text-align:left;font-family: monospace;">
-select()
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 12em; ">
-select rows
-</td>
-<td style="text-align:left;font-family: monospace;">
-filter()
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 12em; ">
-order rows
-</td>
-<td style="text-align:left;font-family: monospace;">
-arrange()
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 12em; ">
-add new columns
-</td>
-<td style="text-align:left;font-family: monospace;">
-mutate()
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 12em; ">
-join data frames
-</td>
-<td style="text-align:left;font-family: monospace;">
-left_join(), right_join(), inner_join()
-</td>
-</tr>
-</tbody>
-</table>
-<p>see <code>dplyr</code> Cheatsheet <a href="../extras/data-transformation.pdf" target="_blank" rel="noopener">cheat sheet</a> for more</p>
-<p><strong>Filter rows</strong> with <code>filter()</code> or <code>slice()</code></p>
-<div class="indented2">
-<p><code>iris %&gt;% filter(Sepal.Length &gt; 7, Species=="virginica")</code></p>
-<p><code>iris %&gt;% slice(5:10)</code></p>
-</div>
-<div class="indented2">
-<p><code>iris %&gt;% filter(Sepal.Length &gt; 7, Species=="virginica")</code></p>
-<p><code>iris %&gt;% slice(5:10)</code></p>
-</div>
-<p><strong>Subset or rearrange columns</strong> with <code>select()</code></p>
-<div class="indented2">
-<p><code>iris %&gt;% select(Petal.Length, Species)</code></p>
-</div>
-</div>
-<div id="download-todays-r-notebooks" class="slide section level1">
-<h1>Download Today’s R Notebooks</h1>
-<p>To download the R Notebooks:</p>
-<div class="indented2">
+<p>Functions generally do one or two things:</p>
 <ol style="list-style-type: decimal">
-<li><p>Make sure the working directory is where the ‘data’ folder is</p></li>
-<li><p>Run the following:</p></li>
+<li>take an <strong>action</strong> (e.g., plot, download data)</li>
+<li>return values</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">## Download R Notebook Rmd file(s) into the current working directory</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>nb_url &lt;-<span class="st"> &quot;https://github.com/ucanr-igis/rspatial_data/raw/master/notebooks_2021-03-25.zip&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>temp_fn &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext=</span><span class="st">&quot;.zip&quot;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">download.file</span>(nb_url, <span class="dt">destfile=</span>temp_fn, <span class="dt">mode=</span><span class="st">&quot;wb&quot;</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">unzip</span>(temp_fn, <span class="dt">exdir =</span> <span class="st">&quot;.&quot;</span>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">unlink</span>(temp_fn)</span></code></pre></div>
-<ol start="3" style="list-style-type: decimal">
-<li>Look in the ‘Files’ pane to make sure they’re there!</li>
-</ol>
+<h2 id="creating-functions">Creating Functions</h2>
+<p>You define a function like you define a variable:</p>
+<pre><code>myfun &lt;- function() { 
+  ## code goes here
+}</code></pre>
+<h2 id="example-hello-world">Example: Hello World</h2>
+<p>A simple function that takes an action.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>hello_world &lt;-<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="kw">print</span>(<span class="st">&quot;Hello world!&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>}</span></code></pre></div>
+<p>You call custom functions like any built-in function. Remember to add the <tt>()</tt>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">hello_world</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;Hello world!&quot;</code></pre>
+<div class="tryit">
+<p>Create a hello_world function that prints something to the console.</p>
+<p>Call it.</p>
 </div>
-<p><a href="../datasets.html">Datasets</a> page now has import code! <img src="images/danc_man_32x32.gif" /></p>
-<p>
-<br/>
-<hr/>
-<strong>Next: </strong> <a href="sf-attrib-qry.html">Working with Attribute Tables</a>
-</p>
+</div>
+<div id="returning-values" class="slide section level1">
+<h1>Returning Values</h1>
+<p>Functions will return a value when:</p>
+<div class="indented2">
+<ul>
+<li>it reaches the last line of code</li>
+<li>it encounters a <tt>return()</tt> function</li>
+</ul>
+</div>
+<h2 id="example-returning-a-value">Example: Returning a Value</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>pi_squared &lt;-<span class="st"> </span><span class="cf">function</span>() {</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">return</span>(pi <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>}</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>x &lt;-<span class="st"> </span><span class="kw">pi_squared</span>()</span>
+<span id="cb5-6"><a href="#cb5-6"></a>x</span></code></pre></div>
+<pre><code>## [1] 9.869604</code></pre>
+<div class="tip">
+<p>If you need to return multiple variables, or an unstructured object, put them in a list object and return the list.</p>
+</div>
+</div>
+<div id="adding-arguments" class="slide section level1">
+<h1>Adding Arguments</h1>
+<p>Arguments add flexibility to your function, allowing you to use it in different places in your code. You define arguments in the function definition.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>inch2cm &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw">return</span>(x <span class="op">*</span><span class="st"> </span><span class="fl">2.54</span>)  </span>
+<span id="cb7-3"><a href="#cb7-3"></a>}</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">inch2cm</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 25.4</code></pre>
+<div class="tip">
+<p>The code in your function should <strong><em>only</em></strong> depend on arguments passed to it, not other variables or packages which may or may not be available.</p>
+<p>Arguments are passed as <em>copies</em> (as opposed to a pointer). This means if the function modifies the argument, it won’t change the argument in the calling environment.</p>
+</div>
+<h2 id="multiple-arguments">Multiple Arguments</h2>
+<p>Separate multiple arguments with commas.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>circle_pts &lt;-<span class="st"> </span><span class="cf">function</span>(radius, ctr_x, ctr_y) {</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  theta &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">0</span>, <span class="dt">to=</span><span class="dv">2</span><span class="op">*</span>pi, <span class="dt">by=</span>pi<span class="op">/</span><span class="dv">18</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>  xs &lt;-<span class="st"> </span>ctr_x <span class="op">+</span><span class="st"> </span>radius <span class="op">*</span><span class="st"> </span><span class="kw">cos</span>(theta)</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  ys &lt;-<span class="st"> </span>ctr_y <span class="op">+</span><span class="st"> </span>radius <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(theta)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="kw">return</span> (<span class="kw">cbind</span>(xs, ys))</span>
+<span id="cb9-6"><a href="#cb9-6"></a>}</span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>pts &lt;-<span class="st"> </span><span class="kw">circle_pts</span>(<span class="fl">0.5</span>, <span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="kw">head</span>(pts)</span></code></pre></div>
+<pre><code>##            xs       ys
+## [1,] 10.50000 10.00000
+## [2,] 10.49240 10.08682
+## [3,] 10.46985 10.17101
+## [4,] 10.43301 10.25000
+## [5,] 10.38302 10.32139
+## [6,] 10.32139 10.38302</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">plot</span>(pts, <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">asp=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="custom-functions_files/figure-slidy/circl01-1.png" width="400" height="400" style="display: block; margin: auto;" /></p>
+<p>R will throw an error message if required arguments are not passed.</p>
+<div class="tip">
+<p>R doesn’t require you to declare a data type for arguments, so if you need to check data type you need to build that in your code. E.g.,</p>
+<pre><code>if (!inherits(x, &quot;list&quot;)) stop(&quot;x should be a list&quot;)</code></pre>
+</div>
+<h2 id="providing-default-values">Providing Default Values</h2>
+<p>The way you make an argument optional is to give it a default value.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>circle_pts &lt;-<span class="st"> </span><span class="cf">function</span>(radius, <span class="dt">ctr_x=</span><span class="dv">0</span>, <span class="dt">ctr_y=</span><span class="dv">0</span>) {</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  theta &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">0</span>, <span class="dt">to=</span><span class="dv">2</span><span class="op">*</span>pi, <span class="dt">by=</span>pi<span class="op">/</span><span class="dv">18</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  xs &lt;-<span class="st"> </span>ctr_x <span class="op">+</span><span class="st"> </span>radius <span class="op">*</span><span class="st"> </span><span class="kw">cos</span>(theta)</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  ys &lt;-<span class="st"> </span>ctr_y <span class="op">+</span><span class="st"> </span>radius <span class="op">*</span><span class="st"> </span><span class="kw">sin</span>(theta)</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="kw">return</span> (<span class="kw">cbind</span>(xs, ys))</span>
+<span id="cb13-6"><a href="#cb13-6"></a>}</span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a>pts &lt;-<span class="st"> </span><span class="kw">circle_pts</span>(<span class="dv">1</span>)</span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="kw">head</span>(pts)</span></code></pre></div>
+<pre><code>##             xs        ys
+## [1,] 1.0000000 0.0000000
+## [2,] 0.9848078 0.1736482
+## [3,] 0.9396926 0.3420201
+## [4,] 0.8660254 0.5000000
+## [5,] 0.7660444 0.6427876
+## [6,] 0.6427876 0.7660444</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">plot</span>(pts, <span class="dt">type=</span><span class="st">&quot;b&quot;</span>, <span class="dt">asp=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="custom-functions_files/figure-slidy/circl02-1.png" width="400" height="400" style="display: block; margin: auto;" /></p>
+<div class="tryit">
+<p>Write a function that squares the log of the argument. Test if your function is vectorized.</p>
+<p><span id="soln_tgyfdc" class="showhidesoln" onclick="showHide(&#39;tgyfdc&#39;);return false;">[Solution]</span></p>
+<div id="tgyfdc" class="hint">
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>log_sq &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="kw">log</span>(x) <span class="op">^</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>}</span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="kw">log_sq</span>(<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">log_sq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##  [1] 0.000000 0.480453 1.206949 1.921812 2.590290 3.210402 3.786566 4.324077 4.827796 5.301898</code></pre>
+<p>Yes it is vectorized because both <tt>log()</tt> and exponentiation (<tt>^</tt>) are vector functions.</p>
+</div>
+</div>
+</div>
+<div id="writing-custom-functions---tips-and-good-practices" class="slide section level1">
+<h1>Writing Custom Functions - Tips and Good Practices</h1>
+<div class="indented2">
+<ul>
+<li>put the non-optional arguments first</li>
+<li>check the value and class of arguments as needed</li>
+<li>best functions do one small thing (modular)</li>
+<li>avoid naming your functions with a built-in function name</li>
+<li>exchange information through arguments and return values</li>
+<li>remember to load packages!</li>
+<li>send message to the console using <tt>print()</tt>, <tt>cat()</tt> statements</li>
+<li>functions can be saved in R files or packages reloaded with <tt>source()</tt>, e.g.,</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">source</span>(<span class="st">&quot;~/MyScripts/andy_utils.R&quot;</span>)</span></code></pre></div>
+</div>
+<div class="tryit">
+<p>Write a function that takes as its argument a sf object, and returns the area of the bounding box.</p>
+</div>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

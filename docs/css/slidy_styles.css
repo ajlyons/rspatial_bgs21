@@ -60,11 +60,14 @@ div.hrleft {
 .indented1 {
   margin-left:1em;
 }
-.indented1-r {
+.indented1r {
   margin-right:1em;
 }
 .indented2 {
   margin-left:2em;
+}
+.indented2r {
+  margin-right:2em;
 }
 .indented3 {
   margin-left:3em;
