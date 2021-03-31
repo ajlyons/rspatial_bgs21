@@ -300,7 +300,7 @@ distance between features
 <p>Measurement functions from <strong>sf</strong> compute length and area in <strong>map units</strong>, but the units are saved as part of the result. This makes it easy to convert to using <tt><strong>set_units()</strong></tt> function from <strong>units</strong> package.</p>
 </div>
 <!--- TryIt --->
-<h3 id="example-compute-the-area-of-yosemite">Example: Compute the area of Yosemite</h3>
+<h3 id="example-compute-the-area-of-yosemite">Example: Compute the Area of Yosemite</h3>
 <p>To get accurate results, we should project the boundary into UTM:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">## Define a convenience variable for UTM Zone 11</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>epsg_utm11n_nad83 &lt;-<span class="st"> </span><span class="dv">26911</span></span>
@@ -376,7 +376,7 @@ distance between features
 </div>
 <div id="compute-lengths" class="slide section level1">
 <h1>Compute Lengths</h1>
-<p>Computing lengths and permeters is done similarly with <tt>st_length()</tt>.</p>
+<p>Computing lengths and perimeters is done similarly with <code>st_length()</code>.</p>
 <h3 id="example-how-many-miles-of-primary-roads-are-there">Example: How many miles of primary roads are there?</h3>
 <p>First import the roads and inspect the attribute table.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">## Import the roads</span></span>
@@ -456,7 +456,7 @@ distance between features
 </div>
 <!--- TryIt --->
 <div class="tip">
-<p>To add geometric measurements to the attribute table, use <tt><strong>dplyr::mutate()</strong></tt></p>
+<p>To add geometric measurements to the attribute table, use <strong><code>dplyr::mutate()</code></strong>:</p>
 <div class="indented1 indented1-r">
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">## Add road length to the attribute table</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a>yose_roads &lt;-<span class="st"> </span>yose_roads <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -468,11 +468,7 @@ distance between features
 </div>
 <div id="r-notebook-exercise-1" class="slide section level1">
 <h1>R Notebook Exercise 1</h1>
-<p>Open <em>nb_geoprocessing01.Rmd</em></p>
-<div class="indented2" style="font-style:italic; font-size:90%; border:1px dashed gray; width:600px;">
-<p>If you don’t have it, you can get it <a href="https://ucanr-igis.github.io/rspatial_data/nb_geoprocessing01.nb.html" target="_blank" rel="noopener"><strong>here</strong></a>. Click the ‘code’ button in the upper-right and select ‘Download Rmd’:</p>
-<p><img src="images/download-rmd-btn_172x167.png" /></p>
-</div>
+<p>Open <span style='font-style:italic;'>nb_geoproc_01.Rmd</span></p> <div class="indented2" style="font-style:italic; font-size:90%; border:1px dashed lightgray; width:600px; overflow:hidden; padding:10px;"> <img src="images/download-rmd-btn_140x136x256.png" style="float:right; padding:5px; width:140px; height:136px;"/> <p>If you don't have it, you can get it <a href="https://ucanr-igis.github.io/rspatial_data/nb_geoproc_01.nb.html" target="_blank" rel="noopener" style="font-weight:bold;">here</a>.</p><p>Click the 'code' button in the upper-right and select 'Download Rmd'.</p> </div>
 </div>
 <div id="creating-new-geometries" class="slide section level1">
 <h1>Creating New Geometries</h1>
@@ -735,11 +731,7 @@ symmetric difference (xor, union w/o intersection)
 </div>
 <div id="r-notebook-exercise-2" class="slide section level1">
 <h1>R Notebook Exercise 2</h1>
-<p>Open <em>nb_geoprocessing02.Rmd</em></p>
-<div class="indented2" style="font-style:italic; font-size:90%; border:1px dashed gray; width:600px;">
-<p>If you don’t have it, you can get it <a href="https://ucanr-igis.github.io/rspatial_data/nb_geoprocessing02.nb.html" target="_blank" rel="noopener"><strong>here</strong></a>. Click the ‘code’ button in the upper-right and select ‘Download Rmd’:</p>
-<p><img src="images/download-rmd-btn_172x167.png" /></p>
-</div>
+<p>Open <span style='font-style:italic;'>nb_geoproc_02.Rmd</span></p> <div class="indented2" style="font-style:italic; font-size:90%; border:1px dashed lightgray; width:600px; overflow:hidden; padding:10px;"> <img src="images/download-rmd-btn_140x136x256.png" style="float:right; padding:5px; width:140px; height:136px;"/> <p>If you don't have it, you can get it <a href="https://ucanr-igis.github.io/rspatial_data/nb_geoproc_02.nb.html" target="_blank" rel="noopener" style="font-weight:bold;">here</a>.</p><p>Click the 'code' button in the upper-right and select 'Download Rmd'.</p> </div>
 </div>
 <div id="voronoi-tesselation" class="slide section level1">
 <h1>Voronoi Tesselation</h1>
@@ -807,7 +799,7 @@ symmetric difference (xor, union w/o intersection)
 <p>
 <br/>
 <hr/>
-<strong>Next: </strong> <a href="socrata-api.html">Using the Socrata API</a>
+<strong>Next: </strong> <a href="review-pt4.html">Session 4 Review</a>
 </p>
 </div>
 

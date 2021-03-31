@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Session 3 Review  " />
+  <meta name="author" content="Session 4 Review  " />
   <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-bgs21 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ajlyons.github.io/rspatial_bgs21 '> https://ajlyons.github.io/rspatial_bgs21 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
   <title>Spatial Data Analysis with R  BayGeo, Spring 2021</title>
@@ -217,8 +217,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
   <script src="lib/slidy-2/scripts/slidy.js"></script>
   <script src="lib/slidy_shiny-1/slidy_shiny.js"></script>
-  <script src="lib/kePrint-0.0.1/kePrint.js"></script>
-  <link href="lib/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
    href="../css/slidy_styles.css" />
   <meta name="duration" content="0" />
@@ -227,126 +225,87 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="slide titlepage">
   <h1 class="title"><span class="course-title">Spatial Data Analysis with R </span><br/><span class="course-subtitle">BayGeo, Spring 2021</span></h1>
   <p class="author">
-Session 3 Review <br/><img src='images/computer_review_414x300.png'/>
+Session 4 Review <br/><img src='images/computer_review_414x300.png'/>
   </p>
 </div>
 <div id="highlights-from-last-time" class="slide section level1">
 <h1>Highlights From Last Time</h1>
 <script language="javascript" type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
-<h2 id="piping-syntax">Piping Syntax</h2>
-<div class="indented2">
-<p><tt>fun_a() <strong>%&gt;%</strong> fun_b() <strong>%&gt;%</strong> fun_c() <strong>%&gt;%</strong> … </tt></p>
-<pre style="background-color:white; border:none;">
-iris %>% filter(Sepal.Length > 7) %>% mutate(width_length = Sepal.Width * Sepal.Length)
-<span style="color:DimGrey;">  │        │                             │
-  │        │                             └─ create a new column
-  │        │
-  │        ├─ select those rows where Sepal.Length > 7
-  │        └─ don't have to specify the data frame
-  │    
-  └ start with this data frame 
-</span></pre>
-</div>
-<div class="indented2" style="font-family:monospace">
-<p>ca_counties %&gt;%<br />
-  st_transform(4326) %&gt;%<br />
-  st_geometry() %&gt;%<br />
-  plot()</p>
-</div>
-<p><br />
-</p>
-<h2 id="useful-dplyr-functions">Useful <code>dplyr</code> functions</h2>
-<table class="tbl_compact">
-<tbody>
-<tr>
-<td style="text-align:left;width: 12em; ">
-select column(s)
-</td>
-<td style="text-align:left;font-family: monospace;">
-select()
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 12em; ">
-select rows
-</td>
-<td style="text-align:left;font-family: monospace;">
-filter()
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 12em; ">
-order rows
-</td>
-<td style="text-align:left;font-family: monospace;">
-arrange()
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 12em; ">
-add new columns
-</td>
-<td style="text-align:left;font-family: monospace;">
-mutate()
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 12em; ">
-join data frames
-</td>
-<td style="text-align:left;font-family: monospace;">
-left_join(), right_join(), inner_join()
-</td>
-</tr>
-</tbody>
-</table>
-<p>see <code>dplyr</code> Cheatsheet <a href="../extras/data-transformation.pdf" target="_blank" rel="noopener">cheat sheet</a> for more</p>
-<p><strong>Filter rows</strong> with <code>filter()</code> or <code>slice()</code></p>
-<div class="indented2">
-<p><code>iris %&gt;% filter(Sepal.Length &gt; 7, Species=="virginica")</code></p>
-<p><code>iris %&gt;% slice(5:10)</code></p>
-</div>
-<div class="indented2">
-<p><code>iris %&gt;% filter(Sepal.Length &gt; 7, Species=="virginica")</code></p>
-<p><code>iris %&gt;% slice(5:10)</code></p>
-</div>
-<p><strong>Subset or rearrange columns</strong> with <code>select()</code></p>
-<div class="indented2">
-<p><code>iris %&gt;% select(Petal.Length, Species)</code></p>
-</div>
-<p><br />
-</p>
-<h2 id="mapping-with-tmap">Mapping with <code>tmap</code></h2>
-<p>Build a tmap object by adding together functions that:</p>
+<h2 id="geoprocessing">Geoprocessing</h2>
+<p>Geoprocessing functions operate on the geometry of features</p>
+<p>Functions fall into 3 categories:</p>
 <div class="compact">
 <ol style="list-style-type: decimal">
-<li>Set data sources<br />
+<li>geometric measurements (area and length)<br />
 </li>
-<li>Draw features<br />
+<li>creating new geometries<br />
 </li>
-<li>Add map elements<br />
-</li>
-<li>Set global map properties<br />
-</li>
+<li>tests for spatial proximity or relationships (covered under spatial queries)</li>
 </ol>
 </div>
 <p><br />
 </p>
-<p>Example:</p>
-<div class="indented2">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">tm_shape</span>(yose_bnd_ll) <span class="op">+</span><span class="st">                             </span><span class="co">## Specify data source</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>() <span class="op">+</span><span class="st">                                   </span><span class="co">## Display function </span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">tm_shape</span>(yose_hp) <span class="op">+</span><span class="st">                                 </span><span class="co">## Specify (another) data source</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="st">  </span><span class="kw">tm_symbols</span>(<span class="dt">size=</span><span class="fl">0.5</span>, <span class="dt">col=</span><span class="st">&quot;navy&quot;</span>) <span class="op">+</span><span class="st">                </span><span class="co">## Display function </span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">tm_shape</span>(yose_roads) <span class="op">+</span><span class="st">                              </span><span class="co">## Specify (another) data source</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="st">  </span><span class="kw">tm_lines</span>(<span class="dt">col=</span><span class="st">&quot;gray60&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>, <span class="dt">lty=</span><span class="st">&quot;dotted&quot;</span>) <span class="op">+</span><span class="st">   </span><span class="co">## Display function </span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">tm_scale_bar</span>(<span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;right&quot;</span>, <span class="st">&quot;bottom&quot;</span>)) <span class="op">+</span><span class="st">       </span><span class="co">## Global element - scale bar</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">tm_compass</span>(<span class="dt">position=</span><span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>)) <span class="op">+</span><span class="st">          </span><span class="co">## Global element - north arrow</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">tm_style</span>(<span class="st">&quot;cobalt&quot;</span>)                                  <span class="co">## Global style preset (default colors)</span></span></code></pre></div>
+<h3 id="make-geometric-measurements">Make Geometric Measurements</h3>
+<div class="compact">
+<ul>
+<li><code>st_area()</code> <em>Area</em><br />
+</li>
+<li><code>st_length()</code> <em>Length / perimeter</em><br />
+</li>
+<li><code>st_distance()</code> <em>Distance between features</em><br />
+</li>
+</ul>
 </div>
-<p>Select static <em>plot</em> or interactive <em>view</em> mode with <code>tmap_mode()</code></p>
+<p>Results are returned in map units (but unit info is saved!)</p>
+<p>Convert to other units using <code>units::set_units()</code></p>
 <p><br />
 </p>
+<h3 id="create-new-geometries">Create new geometries</h3>
+<p>One sf input:</p>
+<div class="compact">
+<ul>
+<li><code>st_buffer()</code><br />
+</li>
+<li><code>st_centroid()</code><br />
+</li>
+<li><code>st_convex_hull()</code><br />
+</li>
+<li><code>st_voronoi()</code><br />
+</li>
+<li><code>st_simplify()</code><br />
+</li>
+</ul>
+</div>
+<p>Two sf inputs:</p>
+<div class="compact">
+<ul>
+<li><code>st_union()</code><br />
+</li>
+<li><code>st_intersection()</code><br />
+</li>
+<li><code>st_difference()</code><br />
+</li>
+</ul>
+</div>
+<p><br />
+</p>
+<h3 id="tests-for-spatial-proximity-or-relationships">Tests for spatial proximity or relationships</h3>
+<div class="compact">
+<ul>
+<li><code>st_intersects()</code> <em>Overlaps or touches</em><br />
+</li>
+<li><code>st_touches()</code> <em>Touches only</em><br />
+</li>
+<li><code>st_within()</code> <em>Within</em><br />
+</li>
+<li><code>st_contains()</code> <em>Contains</em><br />
+</li>
+<li><code>st_overlaps()</code> <em>Overlaps</em><br />
+</li>
+<li><code>st_is_within_distance()</code> <em>Within a distance</em><br />
+</li>
+</ul>
+</div>
 </div>
 <div id="download-todays-r-notebooks" class="slide section level1">
 <h1>Download Today’s R Notebooks</h1>
@@ -356,21 +315,28 @@ left_join(), right_join(), inner_join()
 <li><p>Make sure the working directory is where the ‘data’ folder is</p></li>
 <li><p>Run the following:</p></li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">## Download R Notebook Rmd file(s) into the current working directory</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>nb_url &lt;-<span class="st"> &quot;https://github.com/ucanr-igis/rspatial_data/raw/master/notebooks_2021-03-25.zip&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>temp_fn &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext=</span><span class="st">&quot;.zip&quot;</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">download.file</span>(nb_url, <span class="dt">destfile=</span>temp_fn, <span class="dt">mode=</span><span class="st">&quot;wb&quot;</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">unzip</span>(temp_fn, <span class="dt">exdir =</span> <span class="st">&quot;.&quot;</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">unlink</span>(temp_fn)</span></code></pre></div>
+<div class="indented4 indented2r">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">## Download R Notebook Rmd file(s) into the current working directory</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>nb_url &lt;-<span class="st"> &quot;https://github.com/ucanr-igis/rspatial_data/raw/master/notebooks_2021-03-30.zip&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>temp_fn &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext=</span><span class="st">&quot;.zip&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">download.file</span>(nb_url, <span class="dt">destfile=</span>temp_fn, <span class="dt">mode=</span><span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">unzip</span>(temp_fn, <span class="dt">exdir =</span> <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">unlink</span>(temp_fn)</span></code></pre></div>
+</div>
 <ol start="3" style="list-style-type: decimal">
 <li>Look in the ‘Files’ pane to make sure they’re there!</li>
 </ol>
 </div>
-<p><a href="../datasets.html">Datasets</a> page now has import code! <img src="images/danc_man_32x32.gif" /></p>
+</div>
+<div id="r-notebook-exercise" class="slide section level1">
+<h1>R Notebook Exercise</h1>
+<p>Open <span style='font-style:italic;'>nb_googlesheets-tmap.Rmd</span></p> <div class="indented2" style="font-style:italic; font-size:90%; border:1px dashed lightgray; width:600px; overflow:hidden; padding:10px;"> <img src="images/download-rmd-btn_140x136x256.png" style="float:right; padding:5px; width:140px; height:136px;"/> <p>If you don't have it, you can get it <a href="https://ucanr-igis.github.io/rspatial_data/nb_googlesheets-tmap.nb.html" target="_blank" rel="noopener" style="font-weight:bold;">here</a>.</p><p>Click the 'code' button in the upper-right and select 'Download Rmd'.</p> </div>
+<p><br />
+</p>
 <p>
 <br/>
 <hr/>
-<strong>Next: </strong> <a href="sf-attrib-qry.html">Working with Attribute Tables</a>
+<strong>Next: </strong> <a href="NA.html">Getting Data from APIs</a>
 </p>
 </div>
 

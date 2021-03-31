@@ -548,12 +548,12 @@ iris %>% filter(Sepal.Length > 7) %>% mutate(width_length = Sepal.Width * Sepal.
 ## 9           1.4
 ## 10          1.5</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(Petal.Length) <span class="co">## returns a vector</span></span></code></pre></div>
-<pre><code>##   [1] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 1.5 1.6 1.4 1.1 1.2 1.5 1.3 1.4 1.7 1.5 1.7 1.5 1.0 1.7 1.9 1.6 1.6
-##  [28] 1.5 1.4 1.6 1.6 1.5 1.5 1.4 1.5 1.2 1.3 1.4 1.3 1.5 1.3 1.3 1.3 1.6 1.9 1.4 1.6 1.4 1.5 1.4 4.7 4.5 4.9 4.0
-##  [55] 4.6 4.5 4.7 3.3 4.6 3.9 3.5 4.2 4.0 4.7 3.6 4.4 4.5 4.1 4.5 3.9 4.8 4.0 4.9 4.7 4.3 4.4 4.8 5.0 4.5 3.5 3.8
-##  [82] 3.7 3.9 5.1 4.5 4.5 4.7 4.4 4.1 4.0 4.4 4.6 4.0 3.3 4.2 4.2 4.2 4.3 3.0 4.1 6.0 5.1 5.9 5.6 5.8 6.6 4.5 6.3
-## [109] 5.8 6.1 5.1 5.3 5.5 5.0 5.1 5.3 5.5 6.7 6.9 5.0 5.7 4.9 6.7 4.9 5.7 6.0 4.8 4.9 5.6 5.8 6.1 6.4 5.6 5.1 5.6
-## [136] 6.1 5.6 5.5 4.8 5.4 5.6 5.1 5.1 5.9 5.7 5.2 5.0 5.2 5.4 5.1</code></pre>
+<pre><code>##   [1] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 1.5 1.6 1.4 1.1 1.2 1.5 1.3 1.4 1.7 1.5 1.7 1.5 1.0 1.7 1.9
+##  [26] 1.6 1.6 1.5 1.4 1.6 1.6 1.5 1.5 1.4 1.5 1.2 1.3 1.4 1.3 1.5 1.3 1.3 1.3 1.6 1.9 1.4 1.6 1.4 1.5 1.4
+##  [51] 4.7 4.5 4.9 4.0 4.6 4.5 4.7 3.3 4.6 3.9 3.5 4.2 4.0 4.7 3.6 4.4 4.5 4.1 4.5 3.9 4.8 4.0 4.9 4.7 4.3
+##  [76] 4.4 4.8 5.0 4.5 3.5 3.8 3.7 3.9 5.1 4.5 4.5 4.7 4.4 4.1 4.0 4.4 4.6 4.0 3.3 4.2 4.2 4.2 4.3 3.0 4.1
+## [101] 6.0 5.1 5.9 5.6 5.8 6.6 4.5 6.3 5.8 6.1 5.1 5.3 5.5 5.0 5.1 5.3 5.5 6.7 6.9 5.0 5.7 4.9 6.7 4.9 5.7
+## [126] 6.0 4.8 4.9 5.6 5.8 6.1 6.4 5.6 5.1 5.6 6.1 5.6 5.5 4.8 5.4 5.6 5.1 5.1 5.9 5.7 5.2 5.0 5.2 5.4 5.1</code></pre>
 </div>
 </div>
 <div id="add-columns-with-mutate" class="slide section level1">
@@ -655,15 +655,12 @@ iris %>% filter(Sepal.Length > 7) %>% mutate(width_length = Sepal.Width * Sepal.
 </div>
 <div id="r-notebook-exercise" class="slide section level1">
 <h1>R Notebook Exercise</h1>
-<p>Open <em>nb_dplyr.Rmd</em></p>
-<div class="indented2" style="font-style:italic; font-size:90%; border:1px dashed gray; width:600px;">
-<p>If you don’t have it, you can get it <a href="https://ucanr-igis.github.io/rspatial_data/nb_dplyr.nb.html" target="_blank" rel="noopener"><strong>here</strong></a>. Click the ‘code’ button in the upper-right and select ‘Download Rmd’:</p>
-<p><img src="images/download-rmd-btn_172x167.png" /></p>
-</div>
+<p>Open <span style='font-style:italic;'>nb_dplyr.Rmd</span></p> <div class="indented2" style="font-style:italic; font-size:90%; border:1px dashed lightgray; width:600px; overflow:hidden; padding:10px;"> <img src="images/download-rmd-btn_140x136x256.png" style="float:right; padding:5px; width:140px; height:136px;"/> <p>If you don't have it, you can get it <a href="https://ucanr-igis.github.io/rspatial_data/nb_dplyr.nb.html" target="_blank" rel="noopener" style="font-weight:bold;">here</a>.</p><p>Click the 'code' button in the upper-right and select 'Download Rmd'.</p> </div>
 </div>
 <div id="joining-tables" class="slide section level1">
 <h1>Joining Tables</h1>
-<p>To join tables based on a common field, you can use:</p>
+<p><img src="images/table_join01_820x442x256.png" /></p>
+<p>To join two data frames based on a common field, you can use:</p>
 <div class="indented1">
 <p><tt><strong>left_join(<em>x</em>, <em>y</em>, <em>by</em>)</strong></tt></p>
 </div>
@@ -707,139 +704,19 @@ iris %>% filter(Sepal.Length > 7) %>% mutate(width_length = Sepal.Width * Sepal.
 </div>
 <p><br />
 </p>
-<div class="tip">
+<div class="infobox">
+<p>If you need to join tables on multiple columns, add additional column names to the <code>by</code> argument.</p>
+<p>Join columns must be the same data type (i.e., both numeric or both character).</p>
+<p>There are several variants of <code>left_join()</code>, the most common being <strong><code>right_join()</code></strong> and <strong><code>inner_join()</code></strong>. See help for details.</p>
+</div>
+<!--- info-box --->
+<h2 id="joining-tables-when-the-column-name-is-different">Joining Tables When the Column Name is Different</h2>
 <p>If the join column is named differently in the two tables, you can pass a named character vector as the <code>by</code> argument. A named vector is a vector whose elements have been assigned names. You can construct a named vector with <code>c()</code>.</p>
+<p><img src="images/table_join02_820x442x256.png" /></p>
 <p>For example if the join column was named ‘<em>SpeciesName</em>’ in <em>x</em>, and just ‘<em>Species</em>’ in <em>y</em>, your expression would be:</p>
 <div class="indented2">
 <strong><code>left_join(x, y, by = c("SpeciesName" = "Species"))</code></strong>
 </div>
-<p>If you need to join tables on multiple columns, add additional named character values to the <code>by</code> argument.</p>
-<p>There are several variants of <tt>left_join()</tt>, the most common being <strong><code>right_join()</code></strong> and <strong><code>inner_join()</code></strong>. See help for details.</p>
-</div>
-<!--- info-box --->
-</div>
-<div id="add-more-functions-to-the-expression" class="slide section level1">
-<h1>Add more functions to the expression</h1>
-<p>Let’s add some more functions to our dplyr expression to i) select only <strong>specific columns</strong>, and then ii) <strong>order the rows</strong>.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># Select rows where Sepal.Length &gt; 7 AND Species is virginica, and just the columns</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="co"># for Species, Sepal.Lenth, and Sepal.Width</span></span>
-<span id="cb36-3"><a href="#cb36-3"></a>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>, Species<span class="op">==</span><span class="st">&quot;virginica&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb36-4"><a href="#cb36-4"></a><span class="st">  </span><span class="kw">select</span>(Species, Sepal.Length, Sepal.Width)</span>
-<span id="cb36-5"><a href="#cb36-5"></a></span>
-<span id="cb36-6"><a href="#cb36-6"></a><span class="co"># Finally, sort rows by Sepal.Length followed by Sepal.Width</span></span>
-<span id="cb36-7"><a href="#cb36-7"></a>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>, Species<span class="op">==</span><span class="st">&quot;virginica&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb36-8"><a href="#cb36-8"></a><span class="st">  </span><span class="kw">select</span>(Species, Sepal.Length, Sepal.Width) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb36-9"><a href="#cb36-9"></a><span class="st">  </span><span class="kw">arrange</span>(Sepal.Length, Sepal.Width)</span></code></pre></div>
-<pre><code>##      Species Sepal.Length Sepal.Width
-## 1  virginica          7.1         3.0
-## 2  virginica          7.6         3.0
-## 3  virginica          7.3         2.9
-## 4  virginica          7.2         3.6
-## 5  virginica          7.7         3.8
-## 6  virginica          7.7         2.6
-## 7  virginica          7.7         2.8
-## 8  virginica          7.2         3.2
-## 9  virginica          7.2         3.0
-## 10 virginica          7.4         2.8
-## 11 virginica          7.9         3.8
-## 12 virginica          7.7         3.0
-##      Species Sepal.Length Sepal.Width
-## 1  virginica          7.1         3.0
-## 2  virginica          7.2         3.0
-## 3  virginica          7.2         3.2
-## 4  virginica          7.2         3.6
-## 5  virginica          7.3         2.9
-## 6  virginica          7.4         2.8
-## 7  virginica          7.6         3.0
-## 8  virginica          7.7         2.6
-## 9  virginica          7.7         2.8
-## 10 virginica          7.7         3.0
-## 11 virginica          7.7         3.8
-## 12 virginica          7.9         3.8</code></pre>
-<div class="tryit">
-<ol style="list-style-type: decimal">
-<li>Write an expression that will return i) the ‘Species’ and ‘Petal.Width’ columns from <tt>iris</tt>, ii) for the species ‘versicolor’ only, and iii) in ascending order.</li>
-</ol>
-<p>[<span id="soln_oynbpd" class="showhidesoln" onclick="showHide(&#39;oynbpd&#39;);return false;">Solution</span>]</p>
-<div id="oynbpd" class="hint">
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;versicolor&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="st">  </span><span class="kw">select</span>(Species, Petal.Width) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb38-3"><a href="#cb38-3"></a><span class="st">  </span><span class="kw">arrange</span>(Petal.Width) </span></code></pre></div>
-<pre><code>##       Species Petal.Width
-## 1  versicolor         1.0
-## 2  versicolor         1.0
-## 3  versicolor         1.0
-## 4  versicolor         1.0
-## 5  versicolor         1.0
-## 6  versicolor         1.0
-## 7  versicolor         1.0
-## 8  versicolor         1.1
-## 9  versicolor         1.1
-## 10 versicolor         1.1
-## 11 versicolor         1.2
-## 12 versicolor         1.2
-## 13 versicolor         1.2
-## 14 versicolor         1.2
-## 15 versicolor         1.2
-## 16 versicolor         1.3
-## 17 versicolor         1.3
-## 18 versicolor         1.3
-## 19 versicolor         1.3
-## 20 versicolor         1.3
-## 21 versicolor         1.3
-## 22 versicolor         1.3
-## 23 versicolor         1.3
-## 24 versicolor         1.3
-## 25 versicolor         1.3
-## 26 versicolor         1.3
-## 27 versicolor         1.3
-## 28 versicolor         1.3
-## 29 versicolor         1.4
-## 30 versicolor         1.4
-## 31 versicolor         1.4
-## 32 versicolor         1.4
-## 33 versicolor         1.4
-## 34 versicolor         1.4
-## 35 versicolor         1.4
-## 36 versicolor         1.5
-## 37 versicolor         1.5
-## 38 versicolor         1.5
-## 39 versicolor         1.5
-## 40 versicolor         1.5
-## 41 versicolor         1.5
-## 42 versicolor         1.5
-## 43 versicolor         1.5
-## 44 versicolor         1.5
-## 45 versicolor         1.5
-## 46 versicolor         1.6
-## 47 versicolor         1.6
-## 48 versicolor         1.6
-## 49 versicolor         1.7
-## 50 versicolor         1.8</code></pre>
-</div>
-<ol start="2" style="list-style-type: decimal">
-<li>Modify the expression so it returns rows containing the top 5 Petal Width values.</li>
-</ol>
-<p>[<span id="soln_hjtzkl" class="showhidesoln" onclick="showHide(&#39;hjtzkl&#39;);return false;">Hint</span>] [<span id="soln_bboynbpd" class="showhidesoln" onclick="showHide(&#39;bboynbpd&#39;);return false;">Solution</span>]</p>
-<div id="hjtzkl" class="hint">
-<p>Look for a dplyr function on the <a href="../extras/data-transformation.pdf" target="_blank">data transformation cheat sheet</a> that returns top values.</p>
-</div>
-<!--- soln_hjtzkl --->
-<div id="bboynbpd" class="hint">
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;versicolor&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-2"><a href="#cb40-2"></a><span class="st">  </span><span class="kw">select</span>(Species, Petal.Width) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-3"><a href="#cb40-3"></a><span class="st">  </span><span class="kw">arrange</span>(Petal.Width) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb40-4"><a href="#cb40-4"></a><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">5</span>)</span></code></pre></div>
-<pre><code>## Selecting by Petal.Width</code></pre>
-<pre><code>##      Species Petal.Width
-## 1 versicolor         1.6
-## 2 versicolor         1.6
-## 3 versicolor         1.6
-## 4 versicolor         1.7
-## 5 versicolor         1.8</code></pre>
-</div>
-</div>
-<!--- TryIt --->
 </div>
 <div id="reshaping-data" class="slide section level1">
 <h1>Reshaping Data</h1>
