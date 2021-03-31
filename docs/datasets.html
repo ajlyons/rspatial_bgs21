@@ -376,7 +376,11 @@ summary {
 <ul>
 <li>Weislander 1937 Yosemite vegetation map</li>
 <li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/1047792" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/1047792</a></li>
-<li>see <em>veg37_alliances.dbf</em> for legend (~30 classes)</li>
+<li>see <em>veg37_alliances.dbf</em> for legend (~30 classes)
+<details>
+<summary>import code</summary>
+<pre>yose_veg37_utm <- st_read(dsn="./data", layer="veg37")</pre>
+</details></li>
 </ul>
 <h2 id="yose_hydrology">yose_hydrology.gdb</h2>
 <ul>

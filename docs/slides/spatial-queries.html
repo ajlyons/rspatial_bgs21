@@ -675,8 +675,9 @@ To identify one or more nearest neighbors, use <code>**st_nn()**</code> from the
 <p>Spatial join is like <code>dplyr::left_join()</code>, but instead of joining two tables on a matching column you join them based on their spatial relationship (e.g., intersects).</p>
 <p>You can do a spatial join with:</p>
 <div class="indented2">
-<tt><strong>st_join(<em>x</em>, <em>y</em>, <em>join</em>)</strong></tt>
+<p><tt><strong>st_join(<em>x</em>, <em>y</em>, <em>join</em>)</strong></tt></p>
 </div>
+<p>where <code>x</code> and <code>y</code> are sf objects, and <code>join</code> is the name of a spatial relationship function (e.g., <code>st_intersects</code>).</p>
 <h2 id="example-find-the-vegetation-type-for-each-of-yosemites-campgrounds">Example: Find the vegetation type for each of Yosemite’s Campgrounds</h2>
 <p>Import the vegetation layer and the dbf file which contains the legend:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">## Import the vegetation layer</span></span>
