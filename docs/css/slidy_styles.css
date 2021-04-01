@@ -428,7 +428,7 @@ li.bonus:after {
 /*   font-size: 120%;    */ 
 /* }                     */ 
 
-li.data, li.website, li.forum, li.setup, li.exercises, li.slides, li.script, li.acknowledgment {
+li.data, li.website, li.forum, li.setup, li.exercises, li.slides, li.script, li.acknowledgment, li.notebook {
   margin-top: 1em;
   margin-left: 20px;
   list-style: none;
@@ -445,6 +445,13 @@ li.exercises:before {
   content: url(keyboard_24x24c.png);
   text-decoration: none;
   display: inline-block;
+  width: 28px;
+}
+li.notebook:before {
+  content: url(code_nb_19x24x256.png);
+  text-decoration: none;
+  display: inline-block;
+  text-align: left;
   width: 28px;
 }
 li.data:before {
