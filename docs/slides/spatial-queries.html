@@ -368,7 +368,7 @@ within a distance
 </div>
 <p>where</p>
 <div class="indented2">
-<p><code>x</code> (target) and <code>y</code> (source) are both <code>sf</code> objects</p>
+<p><strong><code>x</code></strong> (target) and <strong><code>y</code></strong> (source) are both <code>sf</code> objects</p>
 <code>sparse = TRUE</code><br />
 
 <div class="compact">
@@ -670,14 +670,16 @@ To identify one or more nearest neighbors, use <code>**st_nn()**</code> from the
 <span id="cb25-9"><a href="#cb25-9"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">legend.show =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p><img src="spatial-queries_files/figure-slidy/nngeo_plot_results_klippy-1.png" width="768" /></p>
 </div>
-<div id="spatial-join" class="slide section level1">
-<h1>Spatial Join</h1>
+<div id="spatial-joins" class="slide section level1">
+<h1>Spatial Joins</h1>
 <p>Spatial join is like <code>dplyr::left_join()</code>, but instead of joining two tables on a matching column you join them based on their spatial relationship (e.g., intersects).</p>
 <p>You can do a spatial join with:</p>
 <div class="indented2">
 <p><tt><strong>st_join(<em>x</em>, <em>y</em>, <em>join</em>)</strong></tt></p>
 </div>
-<p>where <code>x</code> and <code>y</code> are sf objects, and <code>join</code> is the name of a spatial relationship function (e.g., <code>st_intersects</code>).</p>
+<p>where <strong><code>x</code> </strong>and <strong><code>y</code></strong> are sf objects, and <strong><code>join</code></strong> is the name of a spatial relationship function (e.g., <code>st_intersects</code>).</p>
+<p><br />
+</p>
 <h2 id="example-find-the-vegetation-type-for-each-of-yosemites-campgrounds">Example: Find the vegetation type for each of Yosemite’s Campgrounds</h2>
 <p>Import the vegetation layer and the dbf file which contains the legend:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">## Import the vegetation layer</span></span>
