@@ -295,7 +295,7 @@ summary {
 <li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2180706" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2180706</a>
 <details>
 <summary>import code</summary>
-<pre>yose_bnd_ll <- st_read(dsn="./data", layer="yose_boundary")</pre>
+<pre>yose_bnd_ll <- sf::st_read(dsn="./data", layer="yose_boundary")</pre>
 </details></li>
 </ul>
 <h2 id="yose_firehistory">yose_firehistory.gdb</h2>
@@ -307,8 +307,8 @@ summary {
 <li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2237598" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2237598</a>
 <details>
 <summary>import code</summary>
-<pre>yose_firehist_pts_utm <- st_read("./data/yose_firehistory.gdb", "YNP_FireHistoryPoints")</pre>
-<pre>yose_firehist_poly_utm <- st_read("./data/yose_firehistory.gdb", "YNP_FireHistoryPolys")</pre>
+<pre>yose_firehist_pts_utm <- sf::st_read("./data/yose_firehistory.gdb", "YNP_FireHistoryPoints")</pre>
+<pre>yose_firehist_poly_utm <- sf::st_read("./data/yose_firehistory.gdb", "YNP_FireHistoryPolys")</pre>
 </details></li>
 </ul>
 <h2 id="yose_communications">yose_communications.gdb</h2>
@@ -320,7 +320,7 @@ summary {
 <li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2170445" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2170445</a>
 <details>
 <summary>import code</summary>
-<pre>yose_celltwrs_utm <- st_read("./data/yose_communications.gdb", "Cell_Towers")</pre>
+<pre>yose_celltwrs_utm <- sf::st_read("./data/yose_communications.gdb", "Cell_Towers")</pre>
 </details></li>
 </ul>
 <h2 id="yose_roads">yose_roads.gdb</h2>
@@ -331,7 +331,7 @@ summary {
 <li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2180725" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2180725</a>
 <details>
 <summary>import code</summary>
-<pre>yose_roads_utm <- st_read("./data/yose_roads.gdb", "Yosemite_Roads")</pre>
+<pre>yose_roads_utm <- sf::st_read("./data/yose_roads.gdb", "Yosemite_Roads")</pre>
 </details></li>
 </ul>
 <h2 id="yose_trails">yose_trails.gdb</h2>
@@ -343,7 +343,7 @@ summary {
 <li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2180706" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2180706</a>
 <details>
 <summary>import code</summary>
-<pre>yose_trails <- st_read("./data/yose_trails.gdb", layer="Trails")</pre>
+<pre>yose_trails <- sf::st_read("./data/yose_trails.gdb", layer="Trails")</pre>
 </details></li>
 </ul>
 <h2 id="Yosemite_POI">yose_poi.shp</h2>
@@ -353,7 +353,7 @@ summary {
 <li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2225064" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2225064</a>
 <details>
 <summary>import code</summary>
-<pre>yose_poi_utm <- st_read(dsn="./data", layer="yose_poi")</pre>
+<pre>yose_poi_utm <- sf::st_read(dsn="./data", layer="yose_poi")</pre>
 </details></li>
 </ul>
 <h2 id="yosemite_missing_people">yosemite_missing_people.csv</h2>
@@ -369,7 +369,7 @@ summary {
 <li>Source: <a href="https://irma.nps.gov/DataStore/Reference/Profile/2190361" class="uri">https://irma.nps.gov/DataStore/Reference/Profile/2190361</a>
 <details>
 <summary>import code</summary>
-<pre>yose_hp_ll <- st_read("./data/yose_historic_pts.kml", layer="yose_historic_places")</pre>
+<pre>yose_hp_ll <- sf::st_read("./data/yose_historic_pts.kml", layer="yose_historic_places")</pre>
 </details></li>
 </ul>
 <h2 id="veg37">veg37.shp</h2>
@@ -379,7 +379,7 @@ summary {
 <li>see <em>veg37_alliances.dbf</em> for legend (~30 classes)
 <details>
 <summary>import code</summary>
-<pre>yose_veg37_utm <- st_read(dsn="./data", layer="veg37")</pre>
+<pre>yose_veg37_utm <- sf::st_read(dsn="./data", layer="veg37")</pre>
 </details></li>
 </ul>
 <h2 id="yose_hydrology">yose_hydrology.gdb</h2>
@@ -395,14 +395,18 @@ summary {
 <li>Metadata: <a href="https://map.dfg.ca.gov/metadata/calw221_polygon_20131205_wm.html" class="uri">https://map.dfg.ca.gov/metadata/calw221_polygon_20131205_wm.html</a>
 <details>
 <summary>import code</summary>
-<pre>yose_watersheds <- st_read("./data/yose_watersheds.gpkg", layer="calw221")</pre>
+<pre>yose_watersheds <- sf::st_read("./data/yose_watersheds.gpkg", layer="calw221")</pre>
 </details></li>
 </ul>
 <h2 id="srtm_13_05">srtm_13_05.tif</h2>
 <ul>
 <li>DEM for a 5-degree tile enclosing Yosemite National park<br />
 </li>
-<li>Source: Consortium for Spatial Information (CGIAR-CSI) (downloaded using <tt>raster::getData()</tt>)</li>
+<li>Source: Consortium for Spatial Information (CGIAR-CSI) (downloaded using <tt>raster::getData()</tt>)
+<details>
+<summary>import code</summary>
+<pre>srtm1305_rst <- raster::raster("./data/srtm_13_05.tif")</pre>
+</details></li>
 </ul>
 <h2 id="l8_20180822">yose_l8_20180822_b2345.tif</h2>
 <ul>
@@ -442,7 +446,7 @@ summary {
 <li>Source: US Census Bureau
 <details>
 <summary>import code</summary>
-<pre>ca_counties_ll <- st_read("./data/ca_counties.geojson")</pre>
+<pre>ca_counties_ll <- sf::st_read("./data/ca_counties.geojson")</pre>
 </details></li>
 </ul>
 <h2 id="ca_breweries">ca_breweries.csv</h2>

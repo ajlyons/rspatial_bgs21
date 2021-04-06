@@ -345,28 +345,35 @@ left_join(), right_join(), inner_join()
 <span id="cb1-9"><a href="#cb1-9"></a><span class="kw">tm_style</span>(<span class="st">&quot;cobalt&quot;</span>)                                  <span class="co">## Global style preset (default colors)</span></span></code></pre></div>
 </div>
 <p>Select static <em>plot</em> or interactive <em>view</em> mode with <code>tmap_mode()</code></p>
-<p><br />
-</p>
-</div>
-<div id="download-todays-r-notebooks" class="slide section level1">
-<h1>Download Today’s R Notebooks</h1>
-<p>To download the R Notebooks:</p>
+<!-------
+
+# Download Today's R Notebooks
+
+To download the R Notebooks: 
+
 <div class="indented2">
-<ol style="list-style-type: decimal">
-<li><p>Make sure the working directory is where the ‘data’ folder is</p></li>
-<li><p>Run the following:</p></li>
-</ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r klippy copyme"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">## Download R Notebook Rmd file(s) into the current working directory</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>nb_url &lt;-<span class="st"> &quot;https://github.com/ucanr-igis/rspatial_data/raw/master/notebooks_2021-03-25.zip&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>temp_fn &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext=</span><span class="st">&quot;.zip&quot;</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">download.file</span>(nb_url, <span class="dt">destfile=</span>temp_fn, <span class="dt">mode=</span><span class="st">&quot;wb&quot;</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">unzip</span>(temp_fn, <span class="dt">exdir =</span> <span class="st">&quot;.&quot;</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">unlink</span>(temp_fn)</span></code></pre></div>
-<ol start="3" style="list-style-type: decimal">
-<li>Look in the ‘Files’ pane to make sure they’re there!</li>
-</ol>
+1) Make sure the working directory is where the 'data' folder is
+
+2) Run the following:
+
+
+```{.r .klippy .copyme}
+## Download R Notebook Rmd file(s) into the current working directory
+nb_url <- "https://github.com/ucanr-igis/rspatial_data/raw/master/notebooks_2021-03-25.zip"
+temp_fn <- tempfile(fileext=".zip")
+download.file(nb_url, destfile=temp_fn, mode="wb")
+unzip(temp_fn, exdir = ".")
+unlink(temp_fn)
+```
+
+3) Look in the 'Files' pane to make sure they're there!
+
 </div>
-<p><a href="../datasets.html">Datasets</a> page now has import code! <img src="images/danc_man_32x32.gif" /></p>
+
+[Datasets](../datasets.html) page now has import code! ![](images/danc_man_32x32.gif)
+
+
+---->
 <p>
 <br/>
 <hr/>
