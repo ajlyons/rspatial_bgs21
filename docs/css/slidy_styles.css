@@ -18,7 +18,9 @@ Selectors that didn't work
   line-height: 80%;
   margin-left: 2em;
 }
-
+.singlespace li {
+  margin-bottom:0;
+}
 .centerblock {
   text-align:center;
   margin: 0 auto;
