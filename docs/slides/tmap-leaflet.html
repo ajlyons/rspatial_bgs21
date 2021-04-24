@@ -145,6 +145,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACkUlEQVQ4jX2SW0jTcRTHTzNyeZlh6lqmm3POdNPC6SxSEzaqafkykOFoIxTDWpKRFV6iQMNLFyMSsQvUW0WORc2WWBmGKEGZXUyz0NrmNmfa1PYgfHsQ1v5oHjgvX875/M45vy/R8mDJ9caxrFIL5CUWJB00Q9n+7Q+l1BetUMuMTL3JpTB0QVnejd1Hu9DQ60G5eQbqB7PIvj0L2bUZ0KZzghWbs0o7Fx3Tc/B6vStm6+g0wrQvIKh2gKKyUxnNSZoO685SC1YDeL1e9Ll+Ia7WCd5pJ4hojQ8g1nViezETYBqZx93BOdwa9jAgsdUT4J6ZQqC6f4GIiLYU9/RzNWYIdU9hd/8rLjN7UGT8DbWROVVMlQsBBWas142DiIikdfbFMF0POIVm2NzM1zwLS+mvcSsnEajpBSv/8RIgucGJ1EYXEs+NwjrlWfUGMee/Y2PFJIJLrFibex8kOsahhCYnUlpnIL1kh9X9/yMKG2yIOOlAsPYnAveZsE75EEQUQLwTwy5Rsxvx9UxApKEPEYY+BiSizA623oaggkdgq4xLKwRLq7i8sy6EFlpg8wNEVwyAd3wAbZ8cPu3CazeCC/sRojYjaL8Jvm8MPWLDBm03A8CveQ9+7RBia4cYU4QfeokwzTOwc6/4OzKXHap/C5ufD0RNo0i4OAZR81dcnnD69Mp3PxBe9GRkuZdFKk7sqTcQ132EpGUMydetSLnpgOSGHVtbxpHU9AX8mkFEG55/ZrjQL1h82V6esPLVh8Sr40i940J6xzzS7s1C0m6HqHEEiTnatgT5gcPijHxltFwhjpRIQpZjBAJ2lFTBFW5TiOPT8mXx6apdcRl5OaJM1Q6hLC9ls3RPTLgok0NELCKiv02kPqt/O1MZAAAAAElFTkSuQmCC" rel="icon" type="image/x-icon" />
+  <meta name="robots" content="noindex" />
   <script language="javascript" type="text/javascript">
   function TriShowHide(shID) {
     shIDspan = shID + "span";
@@ -213,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     gtag('config', 'UA-163964617-1');
   </script>
-  <script src="lib/header-attrs-2.6/header-attrs.js"></script>
+  <script src="lib/header-attrs-2.7/header-attrs.js"></script>
   <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
   <script src="lib/slidy-2/scripts/slidy.js"></script>
   <script src="lib/slidy_shiny-1/slidy_shiny.js"></script>
@@ -373,10 +374,10 @@ tm_text()
 <span id="cb2-2"><a href="#cb2-2"></a>yose_bnd_ll &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="dt">dsn=</span><span class="st">&quot;./data&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;yose_boundary&quot;</span>)</span></code></pre></div>
 <pre><code>## Reading layer `yose_boundary&#39; from data source `D:\Workshops\R-Spatial\rspatial_mod\outputs\rspatial_data\data&#39; using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 1 feature and 11 fields
-## geometry type:  POLYGON
-## dimension:      XY
-## bbox:           xmin: -119.8864 ymin: 37.4947 xmax: -119.1964 ymax: 38.18515
-## geographic CRS: North_American_Datum_1983</code></pre>
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -119.8864 ymin: 37.4947 xmax: -119.1964 ymax: 38.18515
+## Geodetic CRS:  North_American_Datum_1983</code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">tm_shape</span>(yose_bnd_ll) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>()</span></code></pre></div>
 <p><img src="tmap-leaflet_files/figure-slidy/tmap_yose_bnd_basic-1.png" width="768" /></p>
 </div>
@@ -924,7 +925,7 @@ Format specified for maps of the Netherlands
 </div>
 <div id="r-notebook-exercise" class="slide section level1">
 <h1>R Notebook Exercise</h1>
-<p>Open <span style='font-style:italic;'>nb_tmap.Rmd</span></p> <div class="indented2" style="font-style:italic; font-size:90%; border:1px dashed lightgray; width:600px; overflow:hidden; padding:10px;"> <img src="images/download-rmd-btn_140x136x256.png" style="float:right; padding:5px; width:140px; height:136px;"/> <p>If you don't have it, you can get it <a href="https://ucanr-igis.github.io/rspatial_data/nb_tmap.nb.html" target="_blank" rel="noopener" style="font-weight:bold;">here</a>.</p><p>Click the 'code' button in the upper-right and select 'Download Rmd'.</p> </div>
+<p><p>Open <span style='font-style:italic;'>nb_tmap.Rmd</span></p> <div class="indented2" style="font-style:italic; font-size:90%; border:1px dashed lightgray; width:600px; overflow:hidden; padding:10px;"> <img src="images/download-rmd-btn_140x136x256.png" style="float:right; padding:5px; width:140px; height:136px;"/> <p>If you don't have it, you can get it <a href="https://ucanr-igis.github.io/rspatial_data/nb_tmap.nb.html" target="_blank" rel="noopener" style="font-weight:bold;">here</a>.</p><p>Click the 'code' button in the upper-right and select 'Download Rmd'.</p> </div></p>
 </div>
 <div id="interactive-maps" class="slide section level1">
 <h1>Interactive Maps</h1>
